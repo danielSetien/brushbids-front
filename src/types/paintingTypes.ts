@@ -1,3 +1,5 @@
+import PaintingsList from "../components/PaintingsList/PaintingsList";
+
 export interface Painting {
   id: string;
   author: string;
@@ -24,3 +26,8 @@ export interface Painting {
 }
 
 export type Paintings = Painting[];
+
+export interface PaintingsState {
+  paintings: Paintings;
+  paintingDetail: Painting;
+}
