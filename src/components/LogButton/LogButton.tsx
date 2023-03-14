@@ -14,7 +14,7 @@ const LogButton = ({ isLogged }: LogButtonProps): JSX.Element => {
     <LogButtonStyled>
       <Link href={isLogged ? "" : frontRouteUtils.loginPage}>
         <button
-          className={`button ${isLogged ? "log-out" : "log-in"}`}
+          className={`button ${!isLogged && "button--secondary"}`}
           onClick={() => removeTokenAndLogout()}
         >
           {isLogged ? "Log out" : "Log in"}

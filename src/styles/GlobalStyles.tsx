@@ -32,6 +32,19 @@ const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+
+    font-size: ${(props) => props.theme.fontSize.button};
+    border-radius: ${(props) => props.theme.borderRadius.button};
+
+    color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.secondary};
+  }
+
+  .button--secondary {
+    color: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.primary};
+
+    border: 1px solid ${(props) => props.theme.colors.secondary};
   }
 
   a, a:active, a:visited {
