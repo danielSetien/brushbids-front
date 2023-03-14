@@ -48,10 +48,19 @@ const paintingsSlice = createSlice({
       ...currentPaintingsState,
       paintings: [...action.payload],
     }),
+    loadDetail: (
+      currentPaintingsState: PaintingsState,
+      action: PayloadAction<Painting>
+    ): PaintingsState => ({
+      ...currentPaintingsState,
+      paintingDetail: { ...action.payload },
+    }),
   },
 });
 
-export const { loadPaintings: loadPaintingsActionCreator } =
-  paintingsSlice.actions;
+export const {
+  loadPaintings: loadPaintingsActionCreator,
+  loadDetail: loadDetailActionCreator,
+} = paintingsSlice.actions;
 
 export const paintingsReducer = paintingsSlice.reducer;
