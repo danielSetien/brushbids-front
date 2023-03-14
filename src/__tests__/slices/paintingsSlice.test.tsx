@@ -1,5 +1,6 @@
 import {
   initialPaintingsState,
+  loadDetailActionCreator,
   loadPaintingsActionCreator,
   paintingsReducer,
 } from "../../store/features/paintingsSlice/paintingsSlice";
@@ -15,6 +16,26 @@ describe("Given a paintingsSlice", () => {
       };
 
       const loadedPaintings = loadPaintingsActionCreator(mockPaintings);
+
+      const updatedPaintingsState = paintingsReducer(
+        initialPaintingsState,
+        loadedPaintings
+      );
+
+      expect(updatedPaintingsState).toStrictEqual(expectedPaintingsState);
+    });
+  });
+
+  describe("When its function loadDetail is called", () => {
+    test("Then it should update our paintingDetail with the painting it gets", () => {
+      const painting = mockPaintings[0];
+
+      const expectedPaintingsState: PaintingsState = {
+        ...initialPaintingsState,
+        paintingDetail: painting,
+      };
+
+      const loadedPaintings = loadDetailActionCreator(painting);
 
       const updatedPaintingsState = paintingsReducer(
         initialPaintingsState,
