@@ -54,11 +54,11 @@ const paintingsSlice = createSlice({
       action: PayloadAction<string>
     ): PaintingsState => ({
       ...currentPaintingsState,
-      paintings: {
+      paintings: [
         ...currentPaintingsState.paintings.filter(
           (painting) => painting.id !== action.payload
         ),
-      },
+      ],
     }),
 
     loadDetail: (
