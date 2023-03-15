@@ -9,6 +9,9 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
 
+    width: 100%;
+
+
     display: flex;
     justify-content: center;
   }
@@ -32,6 +35,10 @@ const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+
+    width: 100%;
+
+    padding: 12px;
 
     font-size: ${(props) => props.theme.fontSize.button};
     border-radius: ${(props) => props.theme.borderRadius.button};
@@ -62,7 +69,12 @@ const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme.colors.secondary};
   }
 
-  
+   @media screen and (min-width: ${(props) => props.theme.breakpoint.small}) {
+    .button {
+      width: 200px;
+      margin: 0;
+    }
+   }
 `;
 
 export default GlobalStyles;

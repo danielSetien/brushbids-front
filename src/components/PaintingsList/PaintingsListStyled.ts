@@ -11,6 +11,10 @@ const PaintingsListStyled = styled.section`
     margin-left: -30px;
 
     &__column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       background-clip: padding-box;
 
       padding-left: 30px;

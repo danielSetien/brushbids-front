@@ -45,7 +45,7 @@ const PaintingCard = ({
             <div className="information">
               <span className="information__author">{author}</span>
               <span className="information__name-and-year">{`${name}, ${year}`}</span>
-              <span className="information__price-and-bids">{`$${price} ${
+              <span className="information__price-and-bids">{`$${price.toLocaleString()} ${
                 bidCount ? `(${bidCount} bids)` : ""
               }`}</span>
             </div>

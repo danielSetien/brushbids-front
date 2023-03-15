@@ -5,9 +5,6 @@ const LogButtonStyled = styled.div`
   order: -1;
 
   .button {
-    width: 100%;
-
-    padding: 12px;
     margin-bottom: 20px;
     margin-top: 10px;
   }
@@ -19,12 +16,6 @@ const LogButtonStyled = styled.div`
 
     order: 1;
     flex: 1;
-
-    .button {
-      width: 200px;
-
-      margin: 0;
-    }
   }
 `;
 
