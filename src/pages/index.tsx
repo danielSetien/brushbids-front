@@ -2,7 +2,7 @@ import PaintingsList from "../components/PaintingsList/PaintingsList";
 import Header from "../components/Header/Header";
 import HomePageStyled from "../styles/pages/HomePageStyled";
 
-const Home = (): JSX.Element => {
+const HomePage = (): JSX.Element => {
   return (
     <>
       <HomePageStyled>
@@ -14,4 +14,4 @@ const Home = (): JSX.Element => {
   );
 };
 
-export default Home;
+export default HomePage;

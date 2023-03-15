@@ -1,6 +1,6 @@
-const waitPromise = (milliseconds: number) => {
+const waitPromise = () => {
   return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
+    setTimeout(resolve, 1);
   });
 };
 

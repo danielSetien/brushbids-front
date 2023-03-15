@@ -18,30 +18,34 @@ const PaintingCard = ({
 
   return (
     <>
-      <Link href={`/paintings/${encodeURIComponent(id)}`}>
-        <PaintingCardStyled key={id} role="listitem">
-          <div className="image-container">
+      <PaintingCardStyled key={id} role="listitem">
+        <div className="image-container">
+          <Link href={`/paintings/${encodeURIComponent(id)}`} className="link">
             <Image
               src={image}
               alt={name}
               width={width}
               height={height}
-              className="image-container__image"
+              className="image"
             />
-            <Button
-              className="button edit"
-              ariaLabel={buttonEdit}
-              icon={<MdEdit />}
-              disabled={false}
-            />
-            <Button
-              className="button delete"
-              ariaLabel={buttonDelete}
-              icon={<TfiClose />}
-              disabled={false}
-            />
-          </div>
-          <section className="about">
+          </Link>
+
+          <Button
+            className="button edit"
+            ariaLabel={buttonEdit}
+            icon={<MdEdit />}
+            disabled={false}
+          />
+          <Button
+            className="button delete"
+            ariaLabel={buttonDelete}
+            icon={<TfiClose />}
+            disabled={false}
+          />
+        </div>
+
+        <section className="about">
+          <Link href={`/paintings/${encodeURIComponent(id)}`}>
             <div className="information">
               <span className="information__author">{author}</span>
               <span className="information__name-and-year">{`${name}, ${year}`}</span>
@@ -49,9 +53,9 @@ const PaintingCard = ({
                 bidCount ? `(${bidCount} bids)` : ""
               }`}</span>
             </div>
-          </section>
-        </PaintingCardStyled>
-      </Link>
+          </Link>
+        </section>
+      </PaintingCardStyled>
     </>
   );
 };

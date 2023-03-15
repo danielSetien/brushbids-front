@@ -1,7 +1,12 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import Router from "next/router";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 import LogButton from "./LogButton";
 import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
+import { act } from "react-dom/test-utils";
+
+jest.mock("next/router", () => require("next-router-mock"));
 
 describe("Given a LogButton component", () => {
   describe("When rendered when the user is logged in", () => {
@@ -16,17 +21,24 @@ describe("Given a LogButton component", () => {
       expect(logoutButton).toBeInTheDocument();
     });
 
-    test("Then the Log out button should not link to the login page", async () => {
+    test("Then clicking on the Log out button should not redirect the user to the login page", async () => {
       const isLogged = true;
-      const loginLink = frontRouteUtils.loginPage;
 
       const expectedText = "Log out";
 
+      const spyOnRouteChange = jest.fn();
+
+      Router.events.on("routeChangeStart", () => {
+        spyOnRouteChange();
+      });
+
       renderWithProviders(<LogButton isLogged={isLogged} />);
 
-      const loginButtonLink = screen.getByText(expectedText).closest("a");
+      const logoutButton = screen.getByText(expectedText);
 
-      expect(loginButtonLink).not.toHaveAttribute("href", loginLink);
+      await act(async () => await userEvent.click(logoutButton));
+
+      expect(spyOnRouteChange).not.toHaveBeenCalled();
     });
   });
 
@@ -42,17 +54,24 @@ describe("Given a LogButton component", () => {
       expect(loginButton).toBeInTheDocument();
     });
 
-    test("Then the Log in button should link to the login page", async () => {
+    test("Then clicking on the Log out button should redirect the user to the login page", async () => {
       const isLogged = false;
-      const loginLink = frontRouteUtils.loginPage;
 
       const expectedText = "Log in";
 
+      const spyOnRouteChange = jest.fn();
+
+      Router.events.on("routeChangeStart", () => {
+        spyOnRouteChange();
+      });
+
       renderWithProviders(<LogButton isLogged={isLogged} />);
 
-      const loginButtonLink = screen.getByText(expectedText).closest("a");
+      const loginButton = screen.getByText(expectedText);
 
-      expect(loginButtonLink).toHaveAttribute("href", loginLink);
+      await act(async () => await userEvent.click(loginButton));
+
+      expect(spyOnRouteChange).toHaveBeenCalled();
     });
   });
 });

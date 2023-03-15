@@ -1,6 +1,5 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import useToken from "../../hooks/useToken/useToken";
-import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import LogButtonStyled from "./LogButtonStyled";
 
 interface LogButtonProps {
@@ -9,17 +8,18 @@ interface LogButtonProps {
 
 const LogButton = ({ isLogged }: LogButtonProps): JSX.Element => {
   const { removeTokenAndLogout } = useToken();
+  const router = useRouter();
 
   return (
     <LogButtonStyled>
-      <Link href={isLogged ? "" : frontRouteUtils.loginPage}>
-        <button
-          className={`button ${!isLogged && "button--secondary"}`}
-          onClick={() => removeTokenAndLogout()}
-        >
-          {isLogged ? "Log out" : "Log in"}
-        </button>
-      </Link>
+      <button
+        className={`button ${!isLogged && "button--secondary"}`}
+        onClick={() => {
+          isLogged ? removeTokenAndLogout() : router.push("/login");
+        }}
+      >
+        {isLogged ? "Log out" : "Log in"}
+      </button>
     </LogButtonStyled>
   );
 };
