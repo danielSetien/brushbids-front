@@ -21,6 +21,7 @@ const PaintingsList = (): JSX.Element => {
         className="paintings"
         columnClassName="paintings__column"
         role="list"
+        aria-label="list"
       >
         {paintings.map((painting) => (
           <PaintingCard painting={painting} key={painting.id} />

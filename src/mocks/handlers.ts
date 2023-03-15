@@ -48,7 +48,7 @@ export const handlers = [
   rest.get(
     `${apiUrl}${paintingsEndpoint}/${paintingDetail.id}`,
     async (req, res, ctx) => {
-      await waitPromise(1);
+      await waitPromise();
 
       return res(
         ctx.status(200),

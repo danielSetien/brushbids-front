@@ -8,24 +8,21 @@ const PaintingCardStyled = styled.li`
 
   margin-top: 35px;
 
+  .link {
+    width: 100%;
+  }
+
   .image-container {
     display: flex;
     position: relative;
 
-    &__image {
+    .image {
       object-fit: contain;
 
       width: 100%;
 
       height: fit-content;
       z-index: -1;
-    }
-
-    .button {
-      width: ${(props) => props.theme.cardPainting.buttonWidthAndHeigth};
-      height: ${(props) => props.theme.cardPainting.buttonWidthAndHeigth};
-      border-radius: 50%;
-      background-color: ${(props) => props.theme.colors.primary};
     }
 
     .edit {
@@ -40,6 +37,14 @@ const PaintingCardStyled = styled.li`
       right: ${(props) => props.theme.cardPainting.buttonDistanceToEdge};
     }
   }
+
+  .button {
+    width: ${(props) => props.theme.cardPainting.buttonWidthAndHeigth};
+    height: ${(props) => props.theme.cardPainting.buttonWidthAndHeigth};
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.colors.primary};
+  }
+
   .information {
     background-color: ${(props) => props.theme.colors.primary};
 
@@ -72,7 +77,7 @@ const PaintingCardStyled = styled.li`
     display: flex;
   }
 
-  .favorites-icon  {
+  .favorites-icon {
     align-self: center;
     flex: 1;
 
