@@ -17,8 +17,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1, h2, h3 {
-  font-weight: normal;
-  margin: 0;
+    font-weight: normal;
+    
+    margin: 0;
   }
 
   ul, ol, li {
@@ -69,12 +70,12 @@ const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme.colors.secondary};
   }
 
-   @media screen and (min-width: ${(props) => props.theme.breakpoint.small}) {
+  @media screen and (min-width: ${(props) => props.theme.breakpoint.small}) {
     .button {
       width: 200px;
       margin: 0;
     }
-   }
+  }
 `;
 
 export default GlobalStyles;

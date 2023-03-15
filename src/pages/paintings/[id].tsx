@@ -11,6 +11,14 @@ import { HiOutlinePaintBrush } from "react-icons/hi2";
 const DetailPage = (): JSX.Element => {
   const { getDetail } = usePaintings();
   const {
+    query: { id },
+  } = useRouter();
+
+  useEffect(() => {
+    getDetail(id! as string);
+  }, [getDetail, id]);
+
+  const {
     author,
     certificate,
     condition,
@@ -31,14 +39,6 @@ const DetailPage = (): JSX.Element => {
     year,
     bidCount,
   } = useAppSelector((state) => state.paintings.paintingDetail);
-
-  const {
-    query: { id },
-  } = useRouter();
-
-  useEffect(() => {
-    getDetail(id! as string);
-  }, [getDetail, id]);
 
   return (
     <>

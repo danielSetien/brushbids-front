@@ -1,5 +1,3 @@
-import PaintingsList from "../components/PaintingsList/PaintingsList";
-
 export interface Painting {
   id: string;
   author: string;
