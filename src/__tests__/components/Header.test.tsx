@@ -2,6 +2,8 @@ import { screen } from "@testing-library/react";
 import Header from "../../components/Header/Header";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
+jest.mock("next/router", () => require("next-router-mock"));
+
 describe("Given a Header component", () => {
   describe("When rendered", () => {
     test("Then it should show a logo image", () => {
