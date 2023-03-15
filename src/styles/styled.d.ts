@@ -21,15 +21,16 @@ declare module "styled-components" {
     };
     fontWeight: {
       primary: number;
+      lighter: number;
     };
     fontSize: {
       medium: string;
       bigger: string;
+      large: string;
       button: string;
       title: string;
     };
     margin: {
-      page: string;
       titleBottom: string;
     };
     lineHeight: {
@@ -70,6 +71,9 @@ declare module "styled-components" {
       fontSizePrice: string;
       fontSizeFavoriteIcon: string;
       imageWidth: string;
+    };
+    width: {
+      page: string;
     };
   }
 }

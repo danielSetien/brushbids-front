@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PaintingCardStyled = styled.li`
-  max-width: ${(props) => props.theme.cardPainting.width};
+  width: ${(props) => props.theme.cardPainting.width};
 
   white-space: nowrap;
   overflow: clip;
@@ -14,9 +14,9 @@ const PaintingCardStyled = styled.li`
 
     &__image {
       object-fit: contain;
-      object-position: bottom;
 
-      width: ${(props) => props.theme.cardPainting.imageWidth};
+      width: 100%;
+
       height: fit-content;
       z-index: -1;
     }

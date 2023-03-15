@@ -23,15 +23,16 @@ const theme: DefaultTheme = {
   },
   fontWeight: {
     primary: 400,
+    lighter: 300,
   },
   fontSize: {
     medium: "18px",
     bigger: "20px",
     button: "24px",
+    large: "27px",
     title: "30px",
   },
   margin: {
-    page: "20px",
     titleBottom: "20px",
   },
   lineHeight: {
@@ -72,6 +73,9 @@ const theme: DefaultTheme = {
     fontSizePrice: "27px",
     fontSizeFavoriteIcon: "90px",
     imageWidth: "320px",
+  },
+  width: {
+    page: "95vw",
   },
 };
 

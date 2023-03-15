@@ -1,17 +1,24 @@
 import { screen } from "@testing-library/react";
 import PaintingsList from "../../components/PaintingsList/PaintingsList";
+import { store } from "../../store";
+import { initialPaintingsState } from "../../store/features/paintingsSlice/paintingsSlice";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
 describe("Given a PaintingList component", () => {
-  describe("When is given a list of two paintings", () => {
+  describe("When there is a list of two paintings in our store", () => {
     test("Then it should show two images of paintings", () => {
       const firstPaintingName = mockPaintings[0].name;
       const secondPaintingName = mockPaintings[1].name;
 
-      const preloadedState = { paintings: mockPaintings };
+      const storeWithTwoPaintings = {
+        paintings: {
+          ...initialPaintingsState,
+          paintings: mockPaintings,
+        },
+      };
 
-      renderWithProviders(<PaintingsList />, preloadedState);
+      renderWithProviders(<PaintingsList />, storeWithTwoPaintings);
 
       const firstPainting = screen.getByRole("img", {
         name: firstPaintingName,

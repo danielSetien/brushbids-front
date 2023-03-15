@@ -1,20 +1,66 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Paintings } from "../../../types/paintingTypes";
+import {
+  Painting,
+  Paintings,
+  PaintingsState,
+} from "../../../types/paintingTypes";
 
-export const initialPaintingsState: Paintings = [];
+const initialPaintingDetail: Painting = {
+  id: "",
+  author: "",
+  name: "",
+  year: "",
+  gallery: "",
+  technique: "",
+  size: "",
+  medium: "",
+  materials: "",
+  unique: false,
+  certificate: false,
+  rarity: "",
+  condition: "",
+  signature: false,
+  price: 0,
+  frame: false,
+  highlightOrder: 0,
+  summary: "",
+  image: "",
+  width: 0,
+  height: 0,
+  bidCount: 0,
+};
+
+const initialPaintings = [] as Paintings;
+
+export const initialPaintingsState: PaintingsState = {
+  paintings: initialPaintings,
+  paintingDetail: initialPaintingDetail,
+};
 
 const paintingsSlice = createSlice({
   name: "paintings",
   initialState: initialPaintingsState,
   reducers: {
     loadPaintings: (
-      currentPaintingsState: Paintings,
+      currentPaintingsState: PaintingsState,
       action: PayloadAction<Paintings>
-    ) => [...action.payload],
+    ): PaintingsState => ({
+      ...currentPaintingsState,
+      paintings: [...action.payload],
+    }),
+    loadDetail: (
+      currentPaintingsState: PaintingsState,
+      action: PayloadAction<Painting>
+    ): PaintingsState => ({
+      ...currentPaintingsState,
+      paintingDetail: { ...action.payload },
+    }),
   },
 });
 
-export const { loadPaintings: loadPaintingsActionCreator } =
-  paintingsSlice.actions;
+export const {
+  loadPaintings: loadPaintingsActionCreator,
+  loadDetail: loadDetailActionCreator,
+} = paintingsSlice.actions;
 
 export const paintingsReducer = paintingsSlice.reducer;

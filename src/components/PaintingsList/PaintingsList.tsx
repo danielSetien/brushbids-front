@@ -8,7 +8,7 @@ import PaintingsListStyled from "./PaintingsListStyled";
 
 const PaintingsList = (): JSX.Element => {
   const { getPaintings } = usePaintings();
-  const paintings = useAppSelector((state) => state.paintings);
+  const paintings = useAppSelector((state) => state.paintings.paintings);
 
   useEffect(() => {
     getPaintings();

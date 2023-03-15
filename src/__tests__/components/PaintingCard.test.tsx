@@ -64,7 +64,9 @@ describe("Given a PaintingCard component", () => {
   describe("When rendering a painting with 2 bids", () => {
     test("Then it should show its price and its bid count", () => {
       painting.bidCount = 2;
-      const expectedPriceAndBidcount = `$${painting.price} (${painting.bidCount} bids)`;
+      const expectedPriceAndBidcount = `$${painting.price.toLocaleString()} (${
+        painting.bidCount
+      } bids)`;
 
       renderWithProviders(<PaintingCard painting={painting} />);
 

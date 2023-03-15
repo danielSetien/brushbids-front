@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const HomePageStyled = styled.div`
+  width: ${(props) => props.theme.width.page};
+
   .section-title {
     font-size: 24px;
   }

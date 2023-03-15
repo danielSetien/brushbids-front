@@ -24,3 +24,8 @@ export interface Painting {
 }
 
 export type Paintings = Painting[];
+
+export interface PaintingsState {
+  paintings: Paintings;
+  paintingDetail: Painting;
+}
