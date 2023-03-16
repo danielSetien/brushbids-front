@@ -48,6 +48,19 @@ const paintingsSlice = createSlice({
       ...currentPaintingsState,
       paintings: [...action.payload],
     }),
+
+    deletePainting: (
+      currentPaintingsState: PaintingsState,
+      action: PayloadAction<string>
+    ): PaintingsState => ({
+      ...currentPaintingsState,
+      paintings: [
+        ...currentPaintingsState.paintings.filter(
+          (painting) => painting.id !== action.payload
+        ),
+      ],
+    }),
+
     loadDetail: (
       currentPaintingsState: PaintingsState,
       action: PayloadAction<Painting>
@@ -61,6 +74,7 @@ const paintingsSlice = createSlice({
 export const {
   loadPaintings: loadPaintingsActionCreator,
   loadDetail: loadDetailActionCreator,
+  deletePainting: deletePaintingActionCreator,
 } = paintingsSlice.actions;
 
 export const paintingsReducer = paintingsSlice.reducer;

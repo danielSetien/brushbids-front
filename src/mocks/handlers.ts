@@ -7,7 +7,7 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 const { loginEndpoint, paintingsEndpoint } = backRouteUtils;
 
-const painting = mockPaintings[0];
+export const painting = mockPaintings[0];
 
 const paintingDetail = mockPaintings[1];
 
@@ -59,6 +59,17 @@ export const handlers = [
       );
     }
   ),
+
+  rest.delete(
+    `${apiUrl}${paintingsEndpoint}/${painting.id}`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+
+        ctx.json({})
+      );
+    }
+  ),
 ];
 
 export const errorHandlers = [
@@ -73,4 +84,11 @@ export const errorHandlers = [
   rest.get(`${apiUrl}${paintingsEndpoint}/${painting.id}`, (req, res, ctx) => {
     return res(ctx.status(500));
   }),
+
+  rest.delete(
+    `${apiUrl}${paintingsEndpoint}/${painting.id}`,
+    async (req, res, ctx) => {
+      return res(ctx.status(500));
+    }
+  ),
 ];

@@ -1,10 +1,11 @@
 import {
+  deletePaintingActionCreator,
   initialPaintingsState,
   loadDetailActionCreator,
   loadPaintingsActionCreator,
   paintingsReducer,
 } from "../../store/features/paintingsSlice/paintingsSlice";
-import { PaintingsState } from "../../types/paintingTypes";
+import { Paintings, PaintingsState } from "../../types/paintingTypes";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 
 describe("Given a paintingsSlice", () => {
@@ -43,6 +44,30 @@ describe("Given a paintingsSlice", () => {
       );
 
       expect(updatedPaintingsState).toStrictEqual(expectedPaintingsState);
+    });
+  });
+
+  describe("When its function deletePainting is called to delete a painting", () => {
+    test("Then it should remove said painting from our list of paintings", () => {
+      const painting = mockPaintings[0];
+
+      const expectedPaintingsState = [] as Paintings;
+
+      const mockInitialPaintingsState: PaintingsState = {
+        ...initialPaintingsState,
+        paintings: [painting],
+      };
+
+      const deletedPainting = deletePaintingActionCreator(painting.id);
+
+      const deletedPaintingState = paintingsReducer(
+        mockInitialPaintingsState,
+        deletedPainting
+      );
+
+      expect(deletedPaintingState.paintings).toStrictEqual(
+        expectedPaintingsState
+      );
     });
   });
 });

@@ -2,10 +2,11 @@ import { renderHook } from "@testing-library/react";
 import { toast } from "react-toastify";
 import { act } from "react-dom/test-utils";
 import usePaintings from "../../../hooks/usePaintings/usePaintings";
-import { errorHandlers } from "../../../mocks/handlers";
+import { errorHandlers, painting } from "../../../mocks/handlers";
 import { server } from "../../../mocks/server";
 import { store } from "../../../store";
 import {
+  deletePaintingActionCreator,
   loadDetailActionCreator,
   loadPaintingsActionCreator,
 } from "../../../store/features/paintingsSlice/paintingsSlice";
@@ -94,6 +95,46 @@ describe("Given a getDetail function", () => {
       });
 
       await act(async () => getDetail(paintingDetail.id));
+
+      expect(mockDisplayErrorModal).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a deletePainting function", () => {
+  const id = painting.id;
+
+  describe("When it is called to delete a painting", () => {
+    test("Then it should delete the painting from our list", async () => {
+      const {
+        result: {
+          current: { deletePainting },
+        },
+      } = renderHook(() => usePaintings(), {
+        wrapper: Wrapper,
+      });
+
+      await act(async () => deletePainting(id));
+
+      expect(mockDispatcher).toHaveBeenCalledWith(
+        deletePaintingActionCreator(id)
+      );
+    });
+  });
+
+  describe("When it is called to delete a painting but receives an error insteard", () => {
+    test("Then it should call the function to show the user the error message", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const {
+        result: {
+          current: { deletePainting },
+        },
+      } = renderHook(() => usePaintings(), {
+        wrapper: Wrapper,
+      });
+
+      await act(async () => deletePainting(id));
 
       expect(mockDisplayErrorModal).toHaveBeenCalled();
     });
