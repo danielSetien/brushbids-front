@@ -30,8 +30,8 @@ describe("Given a Button component", () => {
     });
   });
 
-  describe("When the user clicks on it", () => {
-    test("Then it should call the action given to the button", async () => {
+  describe("When the user clicks on the button", () => {
+    test("Then it should call the action given to it", async () => {
       const buttonIconElement = <GrClose />;
       const buttonLabel = "irrelevant";
 
