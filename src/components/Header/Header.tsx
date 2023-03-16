@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useAppSelector } from "../../store/hooks";
 import LogButton from "../LogButton/LogButton";
 import HeaderStyled from "./HeaderStyled";
@@ -17,7 +18,9 @@ const Header = (): JSX.Element => {
         className="logo"
       ></Image>
 
-      <span className="navigation-link">Home</span>
+      <Link className="navigation-link" href={"/"}>
+        Home
+      </Link>
       <span className="navigation-link">Add</span>
 
       <LogButton isLogged={isLogged} />

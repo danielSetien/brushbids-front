@@ -29,5 +29,15 @@ describe("Given a Header component", () => {
 
       expect(loginButton).toBeInTheDocument();
     });
+
+    test("Then it should show a Home link that directs to HomePage", () => {
+      const expectedLinkText = "Home";
+
+      renderWithProviders(<Header />);
+
+      const homeLink = screen.getByText(expectedLinkText).closest("a");
+
+      expect(homeLink).toHaveAttribute("href", "/");
+    });
   });
 });
