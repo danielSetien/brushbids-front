@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import fetch from "node-fetch";
 import displayErrorModal from "../../utils/componentUtils/modals/errorModal";
 import {
+  deletePaintingActionCreator,
   loadDetailActionCreator,
   loadPaintingsActionCreator,
 } from "../../store/features/paintingsSlice/paintingsSlice";
@@ -13,6 +14,7 @@ import definedResponses from "../../utils/responseUtils";
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
   getDetail: (id: string) => Promise<void>;
+  deletePainting: (id: string) => Promise<void>;
 }
 
 const usePaintings = (): UsePaintingsStructure => {
@@ -53,7 +55,23 @@ const usePaintings = (): UsePaintingsStructure => {
     }
   };
 
-  return { getPaintings, getDetail };
+  const deletePainting = async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}${paintingsEndpoint}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(definedResponses.internalServerError.message);
+      }
+
+      dispatch(deletePaintingActionCreator(id));
+    } catch (error: unknown) {
+      displayErrorModal((error as Error).message);
+    }
+  };
+
+  return { getPaintings, getDetail, deletePainting };
 };
 
 export default usePaintings;
