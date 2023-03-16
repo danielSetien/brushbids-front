@@ -3,6 +3,7 @@ interface ButtonProps {
   disabled: boolean;
   ariaLabel: string;
   className: string;
+  action: () => void;
 }
 
 const Button = ({
@@ -10,9 +11,15 @@ const Button = ({
   disabled,
   ariaLabel,
   className,
+  action,
 }: ButtonProps): JSX.Element => {
   return (
-    <button aria-label={ariaLabel} disabled={disabled} className={className}>
+    <button
+      aria-label={ariaLabel}
+      disabled={disabled}
+      className={className}
+      onClick={() => action()}
+    >
       {icon}
     </button>
   );

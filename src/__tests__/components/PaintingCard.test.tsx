@@ -1,10 +1,18 @@
 import { screen } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
+import userEvent from "@testing-library/user-event";
 import PaintingCard from "../../components/PaintingCard/PaintingCard";
 import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
 const painting = mockPaintings[0];
+
+const spy = jest.fn();
+
+jest.mock("../../hooks/usePaintings/usePaintings", () => () => ({
+  deletePainting: () => spy(),
+}));
 
 describe("Given a PaintingCard component", () => {
   describe("When rendered", () => {
@@ -73,6 +81,20 @@ describe("Given a PaintingCard component", () => {
       const priceAndBidCount = screen.getByText(expectedPriceAndBidcount);
 
       expect(priceAndBidCount).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user clicks on its delete button", () => {
+    test("Then it should call the action given to it", async () => {
+      const expectedRenderedButton = ariaLabels.buttonDelete;
+
+      renderWithProviders(<PaintingCard painting={painting} />);
+
+      const deleteButton = screen.getByLabelText(expectedRenderedButton);
+
+      await act(async () => await userEvent.click(deleteButton));
+
+      expect(spy).toHaveBeenCalled();
     });
   });
 });
