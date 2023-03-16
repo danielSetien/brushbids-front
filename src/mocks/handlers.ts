@@ -87,7 +87,7 @@ export const errorHandlers = [
 
   rest.delete(
     `${apiUrl}${paintingsEndpoint}/${painting.id}`,
-    async (req, res, ctx) => {
+    (req, res, ctx) => {
       return res(ctx.status(500));
     }
   ),

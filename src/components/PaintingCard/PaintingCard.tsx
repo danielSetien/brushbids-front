@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import PaintingCardStyled from "./PaintingCardStyled";
 import Link from "next/link";
+import usePaintings from "../../hooks/usePaintings/usePaintings";
 
 interface PaintingCardProps {
   painting: Painting;
@@ -15,6 +16,7 @@ const PaintingCard = ({
   painting: { image, name, id, author, year, price, bidCount, width, height },
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
+  const { deletePainting } = usePaintings();
 
   return (
     <>
@@ -35,12 +37,14 @@ const PaintingCard = ({
             ariaLabel={buttonEdit}
             icon={<MdEdit />}
             disabled={false}
+            action={() => {}}
           />
           <Button
             className="button delete"
             ariaLabel={buttonDelete}
             icon={<TfiClose />}
             disabled={false}
+            action={() => deletePainting(id)}
           />
         </div>
 
