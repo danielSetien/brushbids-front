@@ -1,8 +1,21 @@
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import Router from "next/router";
 import { act } from "react-dom/test-utils";
 import CreateForm from "../../components/CreateForm/CreateForm";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
+
+jest.mock("next/router", () => require("next-router-mock"));
+
+const uploadedImage = new File(["hello"], "hello.png", {
+  type: "image/png",
+});
+
+const createPaintingSpy = jest.fn();
+
+jest.mock("../../hooks/usePaintings/usePaintings", () => () => ({
+  createPainting: () => createPaintingSpy(),
+}));
 
 describe("Given a CreateForm component", () => {
   describe("When rendered", () => {
@@ -75,6 +88,56 @@ describe("Given a CreateForm component", () => {
       await act(async () => await userEvent.type(textAreaInput, expectedText));
 
       expect(textAreaInput).toHaveValue(expectedText);
+    });
+  });
+
+  describe("When the user uploads a picture of a painting 'Mural'", () => {
+    test("Then the image should be stored in the variable named 'image'", async () => {
+      renderWithProviders(<CreateForm />);
+
+      const imageInput = screen.getByLabelText("Image") as HTMLInputElement;
+
+      fireEvent.change(imageInput, { target: { files: [uploadedImage] } });
+
+      expect(imageInput.files![0]).toStrictEqual(uploadedImage);
+    });
+  });
+
+  describe("When the user inserts a painting's author, name, year, price and image", () => {
+    test("Then a request to create a painting should be sent", async () => {
+      const author = "Jackson Pollock";
+      const name = "Mural";
+      const year = "1943";
+      const price = "140000000";
+      const expectedButtonName = "Add";
+
+      const spyOnRouteChange = jest.fn();
+
+      Router.events.on("routeChangeStart", () => {
+        spyOnRouteChange();
+      });
+
+      renderWithProviders(<CreateForm />);
+
+      const authorInput = screen.getByLabelText("Author");
+      const nameInput = screen.getByLabelText("Name");
+      const yearInput = screen.getByLabelText("Year of production");
+      const priceInput = screen.getByLabelText("Minimum bid");
+      const imageInput = screen.getByLabelText("Image") as HTMLInputElement;
+      const addButton = screen.getByRole("button", {
+        name: expectedButtonName,
+      });
+
+      await act(async () => await userEvent.type(authorInput, author));
+      await act(async () => await userEvent.type(nameInput, name));
+      await act(async () => await userEvent.type(yearInput, year));
+      await act(async () => await userEvent.type(priceInput, price));
+
+      fireEvent.change(imageInput, { target: { files: [uploadedImage] } });
+
+      await act(async () => await userEvent.click(addButton));
+
+      expect(createPaintingSpy).toHaveBeenCalled();
     });
   });
 });
