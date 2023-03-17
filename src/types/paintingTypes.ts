@@ -40,7 +40,6 @@ export interface CreatePaintingFormFields {
   medium: string;
   materials: string;
   price: string;
-  image: File;
 }
 
 export interface CreatePaintingSelectFields {

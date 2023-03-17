@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { AiOutlineFolderAdd } from "react-icons/ai";
+import usePaintings from "../../hooks/usePaintings/usePaintings";
 import {
   CreatePaintingFormFields,
   CreatePaintingSelectFields,
+  Painting,
 } from "../../types/paintingTypes";
 import CreateFormStyled from "./CreateFormStyled";
 
 const CreateForm = (): JSX.Element => {
+  const { createPainting } = usePaintings();
+  const [image, setImage] = useState<File>();
+
   const [formFields, setFormFields] = useState<CreatePaintingFormFields>({
     author: "",
     name: "",
@@ -17,7 +22,6 @@ const CreateForm = (): JSX.Element => {
     medium: "",
     materials: "",
     price: "",
-    image: "" as unknown as File,
   });
 
   const [selectFields, setSelectFields] = useState<CreatePaintingSelectFields>({
@@ -55,13 +59,23 @@ const CreateForm = (): JSX.Element => {
     setTextArea(value);
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setImage(event.target.files[0]);
+    }
   };
 
-  const imageName = formFields.image.toString().split("\\")[
-    formFields.image.toString().split("\\").length - 1
-  ];
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const newPaintingData = new FormData(event.currentTarget);
+
+    if (image) {
+      newPaintingData.append("image", image);
+    }
+
+    createPainting(newPaintingData);
+  };
 
   return (
     <CreateFormStyled
@@ -69,11 +83,13 @@ const CreateForm = (): JSX.Element => {
       method="post"
       onSubmit={handleFormSubmit}
       name="Create painting form"
+      encType="multipart/form-data"
     >
       <label htmlFor="author">Author</label>
       <input
         type="text"
         id="author"
+        name="author"
         placeholder="Enter the author's full name"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -83,6 +99,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="name"
+        name="name"
         placeholder="Enter the artwork's name"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -92,6 +109,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="year"
+        name="year"
         placeholder='Enter a year ("YYYY")'
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -101,6 +119,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="gallery"
+        name="gallery"
         placeholder="Enter the name of the gallery"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -110,6 +129,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="technique"
+        name="technique"
         placeholder="Enter the artwork's technique"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -119,6 +139,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="size"
+        name="size"
         placeholder="Enter the artwork's size"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -128,6 +149,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="medium"
+        name="medium"
         placeholder="Enter the artwork's medium"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -137,6 +159,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="materials"
+        name="materials"
         placeholder="Enter the artwork's materials"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -147,6 +170,7 @@ const CreateForm = (): JSX.Element => {
       <input
         type="text"
         id="price"
+        name="price"
         placeholder="Enter the artwork's minimum bid"
         autoComplete="off"
         onChange={handleFormFieldsChange}
@@ -156,6 +180,7 @@ const CreateForm = (): JSX.Element => {
       <label htmlFor="unique">Unique</label>
       <select
         id="unique"
+        name="unique"
         className="selector"
         onChange={handleFormSelectsChange}
       >
@@ -168,6 +193,7 @@ const CreateForm = (): JSX.Element => {
       <select
         id="certificate"
         className="selector"
+        name="certificate"
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
@@ -179,6 +205,7 @@ const CreateForm = (): JSX.Element => {
       <select
         id="rarity"
         className="selector"
+        name="rarity"
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
@@ -190,6 +217,7 @@ const CreateForm = (): JSX.Element => {
       <select
         id="condition"
         className="selector"
+        name="condition"
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
@@ -201,6 +229,7 @@ const CreateForm = (): JSX.Element => {
       <select
         id="signature"
         className="selector"
+        name="signature"
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
@@ -212,6 +241,7 @@ const CreateForm = (): JSX.Element => {
       <select
         id="frame"
         className="selector"
+        name="frame"
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
@@ -221,7 +251,11 @@ const CreateForm = (): JSX.Element => {
 
       <label htmlFor="image">Image</label>
       <label htmlFor="image" className="field faux-placeholder">
-        {formFields.image ? imageName : "Introduce an image"}
+        {image
+          ? image.toString().split("\\")[
+              image.toString().split("\\").length - 1
+            ]
+          : "Introduce an image"}
         <AiOutlineFolderAdd />
       </label>
       <input
@@ -229,7 +263,7 @@ const CreateForm = (): JSX.Element => {
         type="file"
         id="image"
         hidden
-        onChange={handleFormFieldsChange}
+        onChange={handleImageChange}
       />
 
       <label htmlFor="summary">Summary</label>
@@ -238,6 +272,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the summary"
         autoComplete="off"
         className="summary"
+        name="summary"
         onChange={handleTextAreaChange}
       />
       <button
@@ -249,7 +284,7 @@ const CreateForm = (): JSX.Element => {
             Boolean(formFields.name.length) &&
             Boolean(formFields.year.length) &&
             Boolean(formFields.price.length) &&
-            Boolean(formFields.image)
+            Boolean(image)
           )
         }
       >
