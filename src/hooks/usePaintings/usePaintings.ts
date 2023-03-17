@@ -10,6 +10,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { BackDetailResponse, BackPaintingsResponse } from "./types";
 import definedResponses from "../../utils/responseUtils";
+import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -39,21 +40,24 @@ const usePaintings = (): UsePaintingsStructure => {
     }
   }, [apiUrl, dispatch, paintingsEndpoint]);
 
-  const getDetail = async (id: string) => {
-    try {
-      const response = await fetch(`${apiUrl}${paintingsEndpoint}/${id}`);
+  const getDetail = useCallback(
+    async (id: string) => {
+      try {
+        const response = await fetch(`${apiUrl}${paintingsEndpoint}/${id}`);
 
-      if (!response.ok) {
-        throw new Error(definedResponses.internalServerError.message);
+        if (!response.ok) {
+          throw new Error(definedResponses.internalServerError.message);
+        }
+
+        const { painting } = (await response.json()) as BackDetailResponse;
+
+        dispatch(loadDetailActionCreator(painting));
+      } catch (error: unknown) {
+        displayErrorModal((error as Error).message);
       }
-
-      const { painting } = (await response.json()) as BackDetailResponse;
-
-      dispatch(loadDetailActionCreator(painting));
-    } catch (error: unknown) {
-      displayErrorModal((error as Error).message);
-    }
-  };
+    },
+    [apiUrl, dispatch, paintingsEndpoint]
+  );
 
   const deletePainting = async (id: string) => {
     try {
@@ -66,6 +70,10 @@ const usePaintings = (): UsePaintingsStructure => {
       }
 
       dispatch(deletePaintingActionCreator(id));
+
+      const successDeletionMessage = "Painting successfully deleted";
+
+      displaySuccessModal(successDeletionMessage);
     } catch (error: unknown) {
       displayErrorModal((error as Error).message);
     }
