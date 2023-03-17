@@ -13,9 +13,11 @@ export const frontRouteUtils: FrontRouteUtilsStructure = {
 interface BackRouteUtilsStructure {
   loginEndpoint: string;
   paintingsEndpoint: string;
+  createEndpoint: string;
 }
 
 export const backRouteUtils: BackRouteUtilsStructure = {
   loginEndpoint: "/user/login/",
   paintingsEndpoint: "/paintings",
+  createEndpoint: "/paintings/create",
 };
