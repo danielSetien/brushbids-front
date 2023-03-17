@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { CreatePaintingFormFields } from "../../types/paintingTypes";
+import { AiOutlineFolderAdd } from "react-icons/ai";
+import {
+  CreatePaintingFormFields,
+  CreatePaintingSelectFields,
+} from "../../types/paintingTypes";
+import CreateFormStyled from "./CreateFormStyled";
 
 const CreateForm = (): JSX.Element => {
   const [formFields, setFormFields] = useState<CreatePaintingFormFields>({
@@ -11,16 +16,20 @@ const CreateForm = (): JSX.Element => {
     size: "",
     medium: "",
     materials: "",
+    price: "",
+    image: "" as unknown as File,
+  });
+
+  const [selectFields, setSelectFields] = useState<CreatePaintingSelectFields>({
     unique: "",
     certificate: "",
     rarity: "",
     condition: "",
     signature: "",
-    price: "",
     frame: "",
-    highlightOrder: "",
-    summary: "",
   });
+
+  const [textArea, setTextArea] = useState("");
 
   const handleFormFieldsChange = ({
     target: { id, value },
@@ -31,12 +40,35 @@ const CreateForm = (): JSX.Element => {
     });
   };
 
+  const handleFormSelectsChange = ({
+    target: { id, value },
+  }: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectFields({
+      ...selectFields,
+      [id]: value,
+    });
+  };
+
+  const handleTextAreaChange = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextArea(value);
+  };
+
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
+  const imageName = formFields.image.toString().split("\\")[
+    formFields.image.toString().split("\\").length - 1
+  ];
+
   return (
-    <form action="/send-data-here" method="post" onSubmit={handleFormSubmit}>
+    <CreateFormStyled
+      action="/send-data-here"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label htmlFor="author">Author</label>
       <input
         type="text"
@@ -44,6 +76,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the author's full name"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
       <label htmlFor="name">Name</label>
       <input
@@ -52,6 +85,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the artwork's name"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
       <label htmlFor="year">Year of production</label>
       <input
@@ -60,14 +94,16 @@ const CreateForm = (): JSX.Element => {
         placeholder='Enter a year ("YYYY")'
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
-      <label htmlFor="collection">Collection</label>
+      <label htmlFor="gallery">Gallery</label>
       <input
         type="text"
-        id="collection"
-        placeholder="Enter the name of the collection"
+        id="gallery"
+        placeholder="Enter the name of the gallery"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
       <label htmlFor="technique">Technique</label>
       <input
@@ -76,6 +112,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the artwork's technique"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
       <label htmlFor="size">Size</label>
       <input
@@ -84,6 +121,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the artwork's size"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
       <label htmlFor="medium">Medium</label>
       <input
@@ -92,6 +130,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the artwork's medium"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
       <label htmlFor="materials">Materials</label>
       <input
@@ -100,6 +139,7 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the artwork's materials"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
 
       <label htmlFor="price">Minimum bid</label>
@@ -109,35 +149,112 @@ const CreateForm = (): JSX.Element => {
         placeholder="Enter the artwork's minimum bid"
         autoComplete="off"
         onChange={handleFormFieldsChange}
+        className="field"
       />
 
       <label htmlFor="unique">Unique</label>
-      <select id="unique" value={"true | false"}></select>
+      <select
+        id="unique"
+        className="selector"
+        onChange={handleFormSelectsChange}
+      >
+        <option value="" hidden></option>
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
 
       <label htmlFor="certificate">Certificate</label>
-      <select id="certificate" value={"true | false"}></select>
+      <select
+        id="certificate"
+        className="selector"
+        onChange={handleFormSelectsChange}
+      >
+        <option value="" hidden></option>
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
 
       <label htmlFor="rarity">Rarity</label>
-      <select id="rarity" value={"unique | limited units"}></select>
+      <select
+        id="rarity"
+        className="selector"
+        onChange={handleFormSelectsChange}
+      >
+        <option value="" hidden></option>
+        <option value="unique">Unique</option>
+        <option value="limited edition">Limited edition</option>
+      </select>
 
-      <label htmlFor="condition">condition</label>
-      <select id="condition" value={"pristine | good"}></select>
+      <label htmlFor="condition">Condition</label>
+      <select
+        id="condition"
+        className="selector"
+        onChange={handleFormSelectsChange}
+      >
+        <option value="" hidden></option>
+        <option value="excellent">Excellent</option>
+        <option value="good">Good</option>
+      </select>
 
       <label htmlFor="signature">Signature</label>
-      <select id="signature" value={"true | false"}></select>
+      <select
+        id="signature"
+        className="selector"
+        onChange={handleFormSelectsChange}
+      >
+        <option value="" hidden></option>
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
 
       <label htmlFor="frame">Frame</label>
-      <select id="frame" value={"true | false"}></select>
+      <select
+        id="frame"
+        className="selector"
+        onChange={handleFormSelectsChange}
+      >
+        <option value="" hidden></option>
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+
+      <label htmlFor="image">Image</label>
+      <label htmlFor="image" className="field faux-placeholder">
+        {formFields.image ? imageName : "Introduce an image"}
+        <AiOutlineFolderAdd />
+      </label>
+      <input
+        accept="image/*"
+        type="file"
+        id="image"
+        hidden
+        onChange={handleFormFieldsChange}
+      />
 
       <label htmlFor="summary">Summary</label>
-      <input
-        type="text"
+      <textarea
         id="summary"
         placeholder="Enter the summary"
         autoComplete="off"
-        onChange={handleFormFieldsChange}
+        className="summary"
+        onChange={handleTextAreaChange}
       />
-    </form>
+      <button
+        type="submit"
+        className="form__button"
+        disabled={
+          !(
+            Boolean(formFields.author.length) &&
+            Boolean(formFields.name.length) &&
+            Boolean(formFields.year.length) &&
+            Boolean(formFields.price.length) &&
+            Boolean(formFields.image)
+          )
+        }
+      >
+        Add
+      </button>
+    </CreateFormStyled>
   );
 };
 

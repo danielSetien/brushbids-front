@@ -39,13 +39,15 @@ export interface CreatePaintingFormFields {
   size: string;
   medium: string;
   materials: string;
+  price: string;
+  image: File;
+}
+
+export interface CreatePaintingSelectFields {
   unique: string;
   certificate: string;
   rarity: string;
   condition: string;
   signature: string;
-  price: string;
   frame: string;
-  highlightOrder: string;
-  summary: string;
 }
