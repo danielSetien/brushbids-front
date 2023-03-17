@@ -15,6 +15,7 @@ declare module "styled-components" {
         darkest: string;
       };
       modalError: string;
+      modalSuccess: string;
     };
     fonts: {
       primary: string;

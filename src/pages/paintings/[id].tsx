@@ -15,7 +15,9 @@ const DetailPage = (): JSX.Element => {
   } = useRouter();
 
   useEffect(() => {
-    getDetail(id! as string);
+    if (id) {
+      getDetail(id as string);
+    }
   }, [getDetail, id]);
 
   const {
@@ -44,13 +46,15 @@ const DetailPage = (): JSX.Element => {
     <>
       <DetailPageStyled className="detail">
         <Header />
-        <Image
-          src={image}
-          alt={name}
-          width={width}
-          height={height}
-          className="image"
-        />
+        {image && (
+          <Image
+            src={image}
+            alt={name}
+            width={width}
+            height={height}
+            className="image"
+          />
+        )}
         <section className="detail__information">
           <h2 className="title">{author}</h2>
           <h3 className="subtitle">

@@ -70,6 +70,11 @@ const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme.colors.secondary};
   }
 
+  .toast-sucess {
+    background-color: ${(props) => props.theme.colors.modalSuccess};
+    color: ${(props) => props.theme.colors.secondary};
+  }
+
   @media screen and (min-width: ${(props) => props.theme.breakpoint.small}) {
     .button {
       width: 200px;
