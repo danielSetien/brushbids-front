@@ -68,6 +68,7 @@ const CreateForm = (): JSX.Element => {
       action="/send-data-here"
       method="post"
       onSubmit={handleFormSubmit}
+      name="Create painting form"
     >
       <label htmlFor="author">Author</label>
       <input

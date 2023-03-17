@@ -3,7 +3,7 @@ import CreateForm from "../../components/CreateForm/CreateForm";
 import Header from "../../components/Header/Header";
 import CreateFormPageStyled from "../../styles/pages/CreateFormPageStyled";
 
-const CreatePage = () => {
+const CreateFormPage = () => {
   return (
     <>
       <ToastContainer />
@@ -15,4 +15,4 @@ const CreatePage = () => {
   );
 };
 
-export default CreatePage;
+export default CreateFormPage;
