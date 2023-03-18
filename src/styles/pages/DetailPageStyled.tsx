@@ -1,12 +1,20 @@
 import styled from "styled-components";
 
 const DetailPageStyled = styled.main`
-  width: ${(props) => props.theme.width.page};
+  padding-left: ${(props) => props.theme.page.padding};
+  padding-right: ${(props) => props.theme.page.padding};
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+  }
   .image {
     margin-top: 10px;
     margin-bottom: 30px;
@@ -64,21 +72,31 @@ const DetailPageStyled = styled.main`
     display: none;
   }
 
-  @media screen and (min-width: ${(props) => props.theme.breakpoint.small}) {
+  @media screen and (min-width: ${(props) => props.theme.breakpoint.smallest}) {
     flex-wrap: wrap;
 
+    .container {
+      justify-content: center;
+    }
+
     .image {
-      width: 680px;
+      width: 480px;
     }
 
     .detail {
+      &__information-section {
+      }
+
       &__information {
-        width: 680px;
+        display: flex;
+        flex-direction: column;
+
+        width: 480px;
       }
 
       &__secondary-information {
         display: inline-block;
-        width: 680px;
+        width: 480px;
       }
     }
 
@@ -96,10 +114,7 @@ const DetailPageStyled = styled.main`
         margin-top: ${(props) => props.theme.margin.titleBottom};
         border-bottom: none;
 
-        width: 680px;
-      }
-
-      &__all-details {
+        width: 480px;
       }
 
       &__fields {
@@ -110,7 +125,7 @@ const DetailPageStyled = styled.main`
         border-right: none;
 
         padding: ${(props) => props.theme.margin.titleBottom};
-        width: 240px;
+        width: 180px;
       }
 
       &__field {
@@ -128,13 +143,27 @@ const DetailPageStyled = styled.main`
         border-left: none;
 
         padding: ${(props) => props.theme.margin.titleBottom};
-        width: 440px;
+        width: 300px;
       }
 
       &__value {
         margin-top: ${(props) => props.theme.margin.titleBottom};
         margin-right: ${(props) => props.theme.margin.titleBottom};
       }
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    .detail {
+      &__information-section {
+        margin-left: 68px;
+      }
+    }
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.breakpoint.medium}) {
+    .container {
+      justify-content: space-between;
     }
   }
 `;

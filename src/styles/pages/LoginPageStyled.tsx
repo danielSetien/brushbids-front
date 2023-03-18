@@ -4,7 +4,7 @@ const LoginPageStyled = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: ${(props) => props.theme.width.page};
+  width: ${(props) => props.theme.page.width};
 
   .logo {
     align-self: center;

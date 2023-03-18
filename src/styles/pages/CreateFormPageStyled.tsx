@@ -4,7 +4,7 @@ const CreateFormPageStyled = styled.main`
   display: flex;
   flex-direction: column;
 
-  width: ${(props) => props.theme.width.page};
+  width: ${(props) => props.theme.page.width};
 `;
 
 export default CreateFormPageStyled;
