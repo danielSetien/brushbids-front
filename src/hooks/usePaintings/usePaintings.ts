@@ -84,10 +84,10 @@ const usePaintings = (): UsePaintingsStructure => {
 
   const createPainting = async (paintingData: FormData) => {
     try {
-      const response = (await axios.post(
+      const response: Painting = await axios.post(
         `${apiUrl}${createEndpoint}`,
         paintingData
-      )) as Painting;
+      );
 
       dispatch(createPaintingActionCreator(response));
 

@@ -50,8 +50,8 @@ const DetailPage = (): JSX.Element => {
           <Image
             src={image}
             alt={name}
-            width={width}
-            height={height}
+            width={+width!}
+            height={+height!}
             className="image"
           />
         )}
@@ -75,9 +75,12 @@ const DetailPage = (): JSX.Element => {
               Includes a Certificate of Authenticity
             </span>
           )}
-          <span className="price">{`$${price.toLocaleString()} ${
-            bidCount ? `(${bidCount} bids)` : ""
-          }`}</span>
+          <span className="price">
+            {price &&
+              `$${price.toLocaleString()} ${
+                bidCount ? `(${bidCount} bids)` : ""
+              }`}
+          </span>
           <button className="button--secondary bid">Bid</button>
         </section>
         <section className="detail__secondary-information characteristics">

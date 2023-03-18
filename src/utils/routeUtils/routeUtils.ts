@@ -2,12 +2,14 @@ interface FrontRouteUtilsStructure {
   homePage: string;
   loginPage: string;
   paintingDetail: string;
+  createPage: string;
 }
 
 export const frontRouteUtils: FrontRouteUtilsStructure = {
   homePage: "/",
   loginPage: "/login",
   paintingDetail: "/paintings/",
+  createPage: "/create",
 };
 
 interface BackRouteUtilsStructure {

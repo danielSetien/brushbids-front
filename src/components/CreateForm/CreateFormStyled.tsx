@@ -5,6 +5,9 @@ const CreateFormStyled = styled.form`
   flex-direction: column;
   justify-content: center;
 
+  width: 100%;
+  align-self: center;
+
   .field {
     font-size: ${(props) => props.theme.input.fontSize};
 
@@ -101,6 +104,10 @@ const CreateFormStyled = styled.form`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.breakpoint.smallest}) {
+    width: 500px;
   }
 `;
 
