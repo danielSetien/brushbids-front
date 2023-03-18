@@ -10,8 +10,8 @@ jest.mock("../../hooks/useUser/useUser", () => () => ({
   loginUser: mockLoginUser,
 }));
 
-describe("Given a LoginFormStyled component", () => {
-  describe("When renderWithProvidersed", () => {
+describe("Given a LoginForm component", () => {
+  describe("When rendered", () => {
     test("Then it should show the label 'Email", () => {
       const expectedLabel = "Email";
 

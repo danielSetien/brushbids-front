@@ -1,7 +1,9 @@
 import { useCallback } from "react";
+import axios from "axios";
 import fetch from "node-fetch";
 import displayErrorModal from "../../utils/componentUtils/modals/errorModal";
 import {
+  createPaintingActionCreator,
   deletePaintingActionCreator,
   loadDetailActionCreator,
   loadPaintingsActionCreator,
@@ -11,18 +13,21 @@ import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { BackDetailResponse, BackPaintingsResponse } from "./types";
 import definedResponses from "../../utils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
+import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
+import { Painting } from "../../types/paintingTypes";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
   getDetail: (id: string) => Promise<void>;
   deletePainting: (id: string) => Promise<void>;
+  createPainting: (painting: FormData) => Promise<void>;
 }
 
 const usePaintings = (): UsePaintingsStructure => {
   const dispatch = useAppDispatch();
 
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
-  const { paintingsEndpoint } = backRouteUtils;
+  const { paintingsEndpoint, createEndpoint } = backRouteUtils;
 
   const getPaintings = useCallback(async () => {
     try {
@@ -71,15 +76,28 @@ const usePaintings = (): UsePaintingsStructure => {
 
       dispatch(deletePaintingActionCreator(id));
 
-      const successDeletionMessage = "Painting successfully deleted";
-
-      displaySuccessModal(successDeletionMessage);
+      displaySuccessModal(feedbackUtils.success.deletionMessage);
     } catch (error: unknown) {
       displayErrorModal((error as Error).message);
     }
   };
 
-  return { getPaintings, getDetail, deletePainting };
+  const createPainting = async (paintingData: FormData) => {
+    try {
+      const response: Painting = await axios.post(
+        `${apiUrl}${createEndpoint}`,
+        paintingData
+      );
+
+      dispatch(createPaintingActionCreator(response));
+
+      displaySuccessModal(feedbackUtils.success.creationMessage);
+    } catch (error: unknown) {
+      displayErrorModal((error as Error).message);
+    }
+  };
+
+  return { getPaintings, getDetail, deletePainting, createPainting };
 };
 
 export default usePaintings;

@@ -1,4 +1,6 @@
+import { painting } from "../../mocks/handlers";
 import {
+  createPaintingActionCreator,
   deletePaintingActionCreator,
   initialPaintingsState,
   loadDetailActionCreator,
@@ -68,6 +70,24 @@ describe("Given a paintingsSlice", () => {
       expect(deletedPaintingState.paintings).toStrictEqual(
         expectedPaintingsState
       );
+    });
+  });
+
+  describe("When its function createPainting is called to add a painting to our list", () => {
+    test("Then it should add a painting to our list of paintings", () => {
+      const expectedPaintingsState: PaintingsState = {
+        ...initialPaintingsState,
+        paintings: [...initialPaintingsState.paintings, painting],
+      };
+
+      const createdPainting = createPaintingActionCreator(painting);
+
+      const updatedPaintingsState = paintingsReducer(
+        initialPaintingsState,
+        createdPainting
+      );
+
+      expect(updatedPaintingsState).toStrictEqual(expectedPaintingsState);
     });
   });
 });

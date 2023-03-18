@@ -26,8 +26,8 @@ const PaintingCard = ({
             <Image
               src={image}
               alt={name}
-              width={width}
-              height={height}
+              width={+width!}
+              height={+height!}
               className="image"
             />
           </Link>
@@ -53,9 +53,12 @@ const PaintingCard = ({
             <div className="information">
               <span className="information__author">{author}</span>
               <span className="information__name-and-year">{`${name}, ${year}`}</span>
-              <span className="information__price-and-bids">{`$${price.toLocaleString()} ${
-                bidCount ? `(${bidCount} bids)` : ""
-              }`}</span>
+              <span className="information__price-and-bids">
+                {price &&
+                  `$${price.toLocaleString()} ${
+                    bidCount ? `(${bidCount} bids)` : ""
+                  }`}
+              </span>
             </div>
           </Link>
         </section>

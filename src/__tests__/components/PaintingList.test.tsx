@@ -1,6 +1,5 @@
 import { screen } from "@testing-library/react";
 import PaintingsList from "../../components/PaintingsList/PaintingsList";
-import { store } from "../../store";
 import { initialPaintingsState } from "../../store/features/paintingsSlice/paintingsSlice";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";

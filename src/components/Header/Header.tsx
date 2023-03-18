@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useAppSelector } from "../../store/hooks";
+import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import LogButton from "../LogButton/LogButton";
 import HeaderStyled from "./HeaderStyled";
 
@@ -18,10 +19,12 @@ const Header = (): JSX.Element => {
         className="logo"
       ></Image>
 
-      <Link className="navigation-link" href={"/"}>
+      <Link className="navigation-link" href={frontRouteUtils.homePage}>
         Home
       </Link>
-      <span className="navigation-link">Add</span>
+      <Link className="navigation-link" href={frontRouteUtils.createPage}>
+        Add
+      </Link>
 
       <LogButton isLogged={isLogged} />
     </HeaderStyled>

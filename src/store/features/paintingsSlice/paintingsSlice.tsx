@@ -15,19 +15,19 @@ const initialPaintingDetail: Painting = {
   size: "",
   medium: "",
   materials: "",
-  unique: false,
-  certificate: false,
+  unique: "",
+  certificate: "",
   rarity: "",
   condition: "",
-  signature: false,
-  price: 0,
-  frame: false,
-  highlightOrder: 0,
+  signature: "",
+  price: "",
+  frame: "",
+  highlightOrder: "",
   summary: "",
   image: "",
-  width: 0,
-  height: 0,
-  bidCount: 0,
+  width: "",
+  height: "",
+  bidCount: "",
 };
 
 const initialPaintings = [] as Paintings;
@@ -68,6 +68,14 @@ const paintingsSlice = createSlice({
       ...currentPaintingsState,
       paintingDetail: { ...action.payload },
     }),
+
+    createPainting: (
+      currentPaintingsState: PaintingsState,
+      action: PayloadAction<Painting>
+    ): PaintingsState => ({
+      ...currentPaintingsState,
+      paintings: [...currentPaintingsState.paintings, action.payload],
+    }),
   },
 });
 
@@ -75,6 +83,7 @@ export const {
   loadPaintings: loadPaintingsActionCreator,
   loadDetail: loadDetailActionCreator,
   deletePainting: deletePaintingActionCreator,
+  createPainting: createPaintingActionCreator,
 } = paintingsSlice.actions;
 
 export const paintingsReducer = paintingsSlice.reducer;
