@@ -107,19 +107,17 @@ const usePaintings = (): UsePaintingsStructure => {
 
 export default usePaintings;
 
-export const getPaintingsData = async (): Promise<Paintings | undefined> => {
+export const getPaintingsData = async (): Promise<Paintings> => {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
   const { paintingsEndpoint } = backRouteUtils;
 
-  try {
-    const response = await fetch(`${apiUrl}${paintingsEndpoint}`);
+  const response = await fetch(`${apiUrl}${paintingsEndpoint}`);
 
-    if (!response.ok) {
-      throw new Error(definedResponses.internalServerError.message);
-    }
+  if (!response.ok) {
+    throw new Error(definedResponses.internalServerError.message);
+  }
 
-    const { paintings } = (await response.json()) as BackPaintingsResponse;
+  const { paintings } = (await response.json()) as BackPaintingsResponse;
 
-    return paintings;
-  } catch (error: unknown) {}
+  return paintings;
 };
