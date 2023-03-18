@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const HomePageStyled = styled.div`
-  width: ${(props) => props.theme.width.page};
+  min-width: 95.9vw;
+  padding-left: ${(props) => props.theme.page.padding};
+  padding-right: ${(props) => props.theme.page.padding};
 
   .section-title {
     font-size: 24px;

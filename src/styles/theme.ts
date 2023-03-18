@@ -75,8 +75,9 @@ const theme: DefaultTheme = {
     fontSizeFavoriteIcon: "90px",
     imageWidth: "320px",
   },
-  width: {
-    page: "95vw",
+  page: {
+    width: "98vw",
+    padding: "15px",
   },
 };
 

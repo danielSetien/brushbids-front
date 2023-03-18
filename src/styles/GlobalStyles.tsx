@@ -9,9 +9,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
 
-    width: 100%;
-
-
     display: flex;
     justify-content: center;
   }
@@ -34,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
     border: none;
   }
 
-  button {
+  .button {
     cursor: pointer;
 
     width: 100%;
@@ -71,8 +68,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .toast-sucess {
-    background-color: ${(props) => props.theme.colors.modalSuccess};
-    color: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.modalSuccess} !important;
+    color: ${(props) => props.theme.colors.secondary} ;
   }
 
   .field {

@@ -3,7 +3,7 @@ export const breakpoints = {
   large: 1440,
   medium: 1080,
   small: 740,
-  smallest: 525,
+  smallest: 545,
 };
 const { small, medium, large, largest } = breakpoints;
 

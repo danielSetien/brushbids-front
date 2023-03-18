@@ -73,8 +73,9 @@ declare module "styled-components" {
       fontSizeFavoriteIcon: string;
       imageWidth: string;
     };
-    width: {
-      page: string;
+    page: {
+      width: string;
+      padding: string;
     };
   }
 }
