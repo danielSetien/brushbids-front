@@ -108,10 +108,9 @@ const usePaintings = (): UsePaintingsStructure => {
 export default usePaintings;
 
 export const getPaintingsData = async (): Promise<Paintings> => {
-  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
-  const { paintingsEndpoint } = backRouteUtils;
-
-  const response = await fetch(`${apiUrl}${paintingsEndpoint}`);
+  const response = await fetch(
+    "https://dani-setien-final-project-back-202301-bcn.onrender.com/paintings"
+  );
 
   if (!response.ok) {
     throw new Error(definedResponses.internalServerError.message);
