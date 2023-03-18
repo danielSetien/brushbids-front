@@ -14,7 +14,7 @@ import { BackDetailResponse, BackPaintingsResponse } from "./types";
 import definedResponses from "../../utils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
-import { Painting } from "../../types/paintingTypes";
+import { Painting, Paintings } from "../../types/paintingTypes";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -97,7 +97,29 @@ const usePaintings = (): UsePaintingsStructure => {
     }
   };
 
-  return { getPaintings, getDetail, deletePainting, createPainting };
+  return {
+    getPaintings,
+    getDetail,
+    deletePainting,
+    createPainting,
+  };
 };
 
 export default usePaintings;
+
+export const getPaintingsData = async (): Promise<Paintings | undefined> => {
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
+  const { paintingsEndpoint, createEndpoint } = backRouteUtils;
+
+  try {
+    const response = await fetch(`${apiUrl}${paintingsEndpoint}`);
+
+    if (!response.ok) {
+      throw new Error(definedResponses.internalServerError.message);
+    }
+
+    const { paintings } = (await response.json()) as BackPaintingsResponse;
+
+    return paintings;
+  } catch (error: unknown) {}
+};
