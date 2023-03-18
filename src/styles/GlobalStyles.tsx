@@ -9,9 +9,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
 
-    width: 100%;
-
-
     display: flex;
     justify-content: center;
   }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const DetailPageStyled = styled.main`
+const DetailPageStyled = styled.div`
   padding-left: ${(props) => props.theme.page.padding};
   padding-right: ${(props) => props.theme.page.padding};
 

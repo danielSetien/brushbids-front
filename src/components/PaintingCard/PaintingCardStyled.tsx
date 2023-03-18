@@ -7,6 +7,7 @@ const PaintingCardStyled = styled.li`
   overflow: clip;
 
   margin-top: 35px;
+  width: 100%;
 
   .link {
     width: 100%;

@@ -6,10 +6,10 @@ import { ToastContainer } from "react-toastify";
 const HomePage = (): JSX.Element => {
   return (
     <>
-      <ToastContainer />
       <HomePageStyled>
+        <ToastContainer />
         <Header />
-        <h3 className="section-title">Other works from this auction</h3>
+        <h3 className="section-title">All works from this auction</h3>
         <PaintingsList />
       </HomePageStyled>
     </>
