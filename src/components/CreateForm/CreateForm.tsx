@@ -260,7 +260,7 @@ const CreateForm = (): JSX.Element => {
               image.toString().split("\\").length - 1
             ]
           : "Introduce an image"}
-        <AiOutlineFolderAdd />
+        <AiOutlineFolderAdd className="icon" />
       </label>
       <input
         accept="image/*"

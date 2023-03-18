@@ -40,6 +40,7 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
         placeholder="Enter your email address"
         autoComplete="off"
         minLength={8}
+        className="field"
         onChange={handleFormFieldsChange}
       />
       <label htmlFor="password">Password</label>
@@ -50,6 +51,7 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
         required
         minLength={8}
         maxLength={32}
+        className="field"
         onChange={handleFormFieldsChange}
       />
       <button
