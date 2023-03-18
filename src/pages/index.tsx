@@ -5,6 +5,17 @@ import HomePageStyled from "../styles/pages/HomePageStyled";
 import { ToastContainer } from "react-toastify";
 import { getPaintingsData } from "../hooks/usePaintings/usePaintings";
 
+export const getStaticProps: GetStaticProps = async () => {
+  const paintingsData = await getPaintingsData();
+
+  return {
+    props: {
+      paintingsData,
+    },
+    revalidate: 1,
+  };
+};
+
 const HomePage = (): JSX.Element => {
   return (
     <>
@@ -19,14 +30,3 @@ const HomePage = (): JSX.Element => {
 };
 
 export default HomePage;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const paintingsData = await getPaintingsData();
-
-  return {
-    props: {
-      paintingsData,
-    },
-    revalidate: 1,
-  };
-};

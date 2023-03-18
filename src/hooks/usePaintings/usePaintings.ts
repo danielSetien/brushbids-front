@@ -109,7 +109,7 @@ export default usePaintings;
 
 export const getPaintingsData = async (): Promise<Paintings | undefined> => {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
-  const { paintingsEndpoint, createEndpoint } = backRouteUtils;
+  const { paintingsEndpoint } = backRouteUtils;
 
   try {
     const response = await fetch(`${apiUrl}${paintingsEndpoint}`);
