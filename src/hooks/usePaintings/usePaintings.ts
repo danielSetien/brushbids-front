@@ -3,6 +3,7 @@ import axios from "axios";
 import fetch from "node-fetch";
 import displayErrorModal from "../../utils/componentUtils/modals/errorModal";
 import {
+  createPaintingActionCreator,
   deletePaintingActionCreator,
   loadDetailActionCreator,
   loadPaintingsActionCreator,
@@ -12,8 +13,8 @@ import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { BackDetailResponse, BackPaintingsResponse } from "./types";
 import definedResponses from "../../utils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
-import { Painting } from "../../types/paintingTypes";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
+import { Painting } from "../../types/paintingTypes";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -83,10 +84,12 @@ const usePaintings = (): UsePaintingsStructure => {
 
   const createPainting = async (paintingData: FormData) => {
     try {
-      const response = await axios.post(
+      const response = (await axios.post(
         `${apiUrl}${createEndpoint}`,
         paintingData
-      );
+      )) as Painting;
+
+      dispatch(createPaintingActionCreator(response));
 
       displaySuccessModal(feedbackUtils.success.creationMessage);
     } catch (error: unknown) {
