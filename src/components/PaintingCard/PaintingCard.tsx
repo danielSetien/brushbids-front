@@ -7,8 +7,8 @@ import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import PaintingCardStyled from "./PaintingCardStyled";
 import Link from "next/link";
 import usePaintings from "../../hooks/usePaintings/usePaintings";
-import useUser from "../../hooks/useUser/useUser";
 import { useAppSelector } from "../../store/hooks";
+import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 interface PaintingCardProps {
   painting: Painting;
@@ -37,7 +37,7 @@ const PaintingCard = ({
               loading={loading}
             />
           </Link>
-          {username === "administrator" && (
+          {username === administratorUsername && (
             <>
               <Button
                 className="button edit"
