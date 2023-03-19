@@ -7,6 +7,8 @@ import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import PaintingCardStyled from "./PaintingCardStyled";
 import Link from "next/link";
 import usePaintings from "../../hooks/usePaintings/usePaintings";
+import { useAppSelector } from "../../store/hooks";
+import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 interface PaintingCardProps {
   painting: Painting;
@@ -19,6 +21,7 @@ const PaintingCard = ({
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
   const { deletePainting } = usePaintings();
+  const { username } = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -34,21 +37,24 @@ const PaintingCard = ({
               loading={loading}
             />
           </Link>
-
-          <Button
-            className="button edit"
-            ariaLabel={buttonEdit}
-            icon={<MdEdit />}
-            disabled={false}
-            action={() => {}}
-          />
-          <Button
-            className="button delete"
-            ariaLabel={buttonDelete}
-            icon={<TfiClose />}
-            disabled={false}
-            action={() => deletePainting(id)}
-          />
+          {username === administratorUsername && (
+            <>
+              <Button
+                className="button edit"
+                ariaLabel={buttonEdit}
+                icon={<MdEdit />}
+                disabled={false}
+                action={() => {}}
+              />
+              <Button
+                className="button delete"
+                ariaLabel={buttonDelete}
+                icon={<TfiClose />}
+                disabled={false}
+                action={() => deletePainting(id)}
+              />
+            </>
+          )}
         </div>
 
         <section className="about">
