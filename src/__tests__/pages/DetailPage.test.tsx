@@ -19,7 +19,7 @@ describe("Given a DetailPage", () => {
     test("Then it should show the image of said painting", async () => {
       const expectedImageName = paintingDetail.name;
 
-      renderWithProviders(<DetailPage />);
+      renderWithProviders(<DetailPage painting={paintingDetail} />);
 
       await waitFor(() => {
         const image = screen.getByRole("img", {

@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params!.id;
   const painting = await getDetailData(id as string);
 
-  await store.dispatch(loadDetailActionCreator(painting));
+  store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
   };
