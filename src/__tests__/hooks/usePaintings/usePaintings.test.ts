@@ -15,8 +15,7 @@ import {
 import { mockPaintings } from "../../../utils/testUtils/mockHardcodedData";
 import Wrapper from "../../../utils/testUtils/Wrapper";
 import { Painting } from "../../../types/paintingTypes";
-import { response } from "msw";
-import definedResponses from "../../../utils/responseUtils";
+import definedResponses from "../../../utils/responseUtils/responseUtils";
 
 jest.mock("next/router", () => require("next-router-mock"));
 

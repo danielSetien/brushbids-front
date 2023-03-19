@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import Masonry from "react-masonry-css";
 import PaintingCard from "../PaintingCard/PaintingCard";
-import usePaintings, {
-  getPaintingsData,
-} from "../../hooks/usePaintings/usePaintings";
+import usePaintings from "../../hooks/usePaintings/usePaintings";
 import { useAppSelector } from "../../store/hooks";
 import { masonryBreakpoints } from "../../utils/stylesUtils/breakpoints";
 import PaintingsListStyled from "./PaintingsListStyled";
+import getPaintingsData from "../../utils/functionsUtils/functionUtils";
 
 export const getStaticPaths = async () => {
   const paintingsData = await getPaintingsData();
 
-  const paths = paintingsData!.map((painting) => {
+  const paths = paintingsData.map((painting) => {
     return {
       params: { id: painting.id },
     };
@@ -40,8 +39,12 @@ const PaintingsList = (): JSX.Element => {
         role="list"
         aria-label="list"
       >
-        {paintings.map((painting) => (
-          <PaintingCard painting={painting} key={painting.id} />
+        {paintings.map((painting, index) => (
+          <PaintingCard
+            painting={painting}
+            key={painting.id}
+            loading={index < 9 ? "eager" : "lazy"}
+          />
         ))}
       </Masonry>
     </PaintingsListStyled>

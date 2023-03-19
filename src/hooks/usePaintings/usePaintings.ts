@@ -11,10 +11,10 @@ import {
 import { useAppDispatch } from "../../store/hooks";
 import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { BackDetailResponse, BackPaintingsResponse } from "./types";
-import definedResponses from "../../utils/responseUtils";
+import definedResponses from "../../utils/responseUtils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
-import { Painting, Paintings } from "../../types/paintingTypes";
+import { Painting } from "../../types/paintingTypes";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -106,17 +106,3 @@ const usePaintings = (): UsePaintingsStructure => {
 };
 
 export default usePaintings;
-
-export const getPaintingsData = async (): Promise<Paintings> => {
-  const response = await fetch(
-    "https://dani-setien-final-project-back-202301-bcn.onrender.com/paintings"
-  );
-
-  if (!response.ok) {
-    throw new Error(definedResponses.internalServerError.message);
-  }
-
-  const { paintings } = (await response.json()) as BackPaintingsResponse;
-
-  return paintings;
-};

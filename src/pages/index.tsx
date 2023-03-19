@@ -3,7 +3,7 @@ import PaintingsList from "../components/PaintingsList/PaintingsList";
 import Header from "../components/Header/Header";
 import HomePageStyled from "../styles/pages/HomePageStyled";
 import { ToastContainer } from "react-toastify";
-import { getPaintingsData } from "../hooks/usePaintings/usePaintings";
+import getPaintingsData from "../utils/functionsUtils/functionUtils";
 
 export const getStaticProps: GetStaticProps = async () => {
   const paintingsData = await getPaintingsData();
