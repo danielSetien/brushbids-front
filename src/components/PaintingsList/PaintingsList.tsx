@@ -5,22 +5,6 @@ import usePaintings from "../../hooks/usePaintings/usePaintings";
 import { useAppSelector } from "../../store/hooks";
 import { masonryBreakpoints } from "../../utils/stylesUtils/breakpoints";
 import PaintingsListStyled from "./PaintingsListStyled";
-import getPaintingsData from "../../utils/functionsUtils/functionUtils";
-
-export const getStaticPaths = async () => {
-  const paintingsData = await getPaintingsData();
-
-  const paths = paintingsData.map((painting) => {
-    return {
-      params: { id: painting.id },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
 
 const PaintingsList = (): JSX.Element => {
   const { getPaintings } = usePaintings();
