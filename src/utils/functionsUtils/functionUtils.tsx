@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import { BackPaintingsResponse } from "../../hooks/usePaintings/types";
 import { Paintings } from "../../types/paintingTypes";
 import definedResponses from "../responseUtils/responseUtils";
