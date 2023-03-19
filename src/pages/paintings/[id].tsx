@@ -105,34 +105,34 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
           <section className="detail__secondary-information characteristics">
             <p className="characteristics__summary">{summary}</p>
             <ol className="characteristics__fields">
-              <span className="characteristics__field">Materials</span>
-              <span className="characteristics__field">Size</span>
-              <span className="characteristics__field">Rarity</span>
-              <span className="characteristics__field">Medium</span>
-              <span className="characteristics__field">Condition</span>
-              <span className="characteristics__field">Signature</span>
-              <span className="characteristics__field">
+              <li className="characteristics__field">Materials</li>
+              <li className="characteristics__field">Size</li>
+              <li className="characteristics__field">Rarity</li>
+              <li className="characteristics__field">Medium</li>
+              <li className="characteristics__field">Condition</li>
+              <li className="characteristics__field">Signature</li>
+              <li className="characteristics__field">
                 Certificate of authenticity
-              </span>
-              <span className="characteristics__field">Frame</span>
+              </li>
+              <li className="characteristics__field">Frame</li>
             </ol>
             <ol className="characteristics__values">
-              <span className="characteristics__value">{materials}</span>
-              <span className="characteristics__value">{size}</span>
-              <span className="characteristics__value">{rarity}</span>
-              <span className="characteristics__value">{medium}</span>
-              <span className="characteristics__value">{condition}</span>
-              <span className="characteristics__value">
+              <li className="characteristics__value">{materials}</li>
+              <li className="characteristics__value">{size}</li>
+              <li className="characteristics__value">{rarity}</li>
+              <li className="characteristics__value">{medium}</li>
+              <li className="characteristics__value">{condition}</li>
+              <li className="characteristics__value">
                 {signature ? "Is signed by the author" : "Is not signed"}
-              </span>
-              <span className="characteristics__value">
+              </li>
+              <li className="characteristics__value">
                 {certificate
                   ? "Includes a Certificate of Authenticity"
                   : "Does not include a Certificate of Authenticity"}
-              </span>
-              <span className="characteristics__value">
+              </li>
+              <li className="characteristics__value">
                 {frame ? "Is framed" : "Is not framed"}
-              </span>
+              </li>
             </ol>
           </section>
         </div>
