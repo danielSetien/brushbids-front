@@ -11,7 +11,7 @@ import {
 import { useAppDispatch } from "../../store/hooks";
 import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { BackDetailResponse, BackPaintingsResponse } from "./types";
-import definedResponses from "../../utils/responseUtils";
+import definedResponses from "../../utils/responseUtils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import { Painting } from "../../types/paintingTypes";
@@ -97,7 +97,12 @@ const usePaintings = (): UsePaintingsStructure => {
     }
   };
 
-  return { getPaintings, getDetail, deletePainting, createPainting };
+  return {
+    getPaintings,
+    getDetail,
+    deletePainting,
+    createPainting,
+  };
 };
 
 export default usePaintings;

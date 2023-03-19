@@ -14,7 +14,7 @@ import {
   backRouteUtils,
 } from "../../utils/routeUtils/routeUtils";
 import { BackLoginResponse, TokenPayload } from "./types";
-import definedResponses from "../../utils/responseUtils";
+import definedResponses from "../../utils/responseUtils/responseUtils";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;

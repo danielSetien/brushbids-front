@@ -10,10 +10,12 @@ import usePaintings from "../../hooks/usePaintings/usePaintings";
 
 interface PaintingCardProps {
   painting: Painting;
+  loading: "eager" | "lazy";
 }
 
 const PaintingCard = ({
   painting: { image, name, id, author, year, price, bidCount, width, height },
+  loading,
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
   const { deletePainting } = usePaintings();
@@ -29,6 +31,7 @@ const PaintingCard = ({
               width={+width!}
               height={+height!}
               className="image"
+              loading={loading}
             />
           </Link>
 

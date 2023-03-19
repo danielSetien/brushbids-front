@@ -1,13 +1,8 @@
 import styled from "styled-components";
 
 const PaintingCardStyled = styled.li`
-  width: ${(props) => props.theme.cardPainting.width};
-
-  white-space: nowrap;
-  overflow: clip;
-
   margin-top: 35px;
-  width: 100%;
+  overflow: clip;
 
   .link {
     width: 100%;
