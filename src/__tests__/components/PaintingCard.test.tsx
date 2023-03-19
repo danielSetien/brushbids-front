@@ -5,6 +5,8 @@ import PaintingCard from "../../components/PaintingCard/PaintingCard";
 import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
+import { initialUserState } from "../../store/features/userSlice/userSlice";
+import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 const painting = mockPaintings[0];
 
@@ -15,6 +17,13 @@ jest.mock("../../hooks/usePaintings/usePaintings", () => () => ({
 }));
 
 describe("Given a PaintingCard component", () => {
+  const storeWithAdminUser = {
+    user: {
+      ...initialUserState,
+      username: administratorUsername,
+    },
+  };
+
   describe("When rendered", () => {
     test("Then it should show a painting image", () => {
       const expectedPaintingName = painting.name;
@@ -26,26 +35,6 @@ describe("Given a PaintingCard component", () => {
       });
 
       expect(paintingImage).toBeInTheDocument();
-    });
-
-    test("Then it should show an edit button", () => {
-      const expectedRenderedButton = ariaLabels.buttonEdit;
-
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
-
-      const editButton = screen.getByLabelText(expectedRenderedButton);
-
-      expect(editButton).toBeInTheDocument();
-    });
-
-    test("Then it should show an delete button", () => {
-      const expectedRenderedButton = ariaLabels.buttonDelete;
-
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
-
-      const deleteButton = screen.getByLabelText(expectedRenderedButton);
-
-      expect(deleteButton).toBeInTheDocument();
     });
 
     test("Then it should show an author's name", () => {
@@ -84,11 +73,42 @@ describe("Given a PaintingCard component", () => {
     });
   });
 
-  describe("When the user clicks on its delete button", () => {
+  describe("When rendered by the administrator", () => {
+    test("Then it should show an edit button", () => {
+      const expectedRenderedButton = ariaLabels.buttonEdit;
+
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" />,
+        storeWithAdminUser
+      );
+
+      const editButton = screen.getByLabelText(expectedRenderedButton);
+
+      expect(editButton).toBeInTheDocument();
+    });
+
+    test("Then it should show an delete button", () => {
+      const expectedRenderedButton = ariaLabels.buttonDelete;
+
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" />,
+        storeWithAdminUser
+      );
+
+      const deleteButton = screen.getByLabelText(expectedRenderedButton);
+
+      expect(deleteButton).toBeInTheDocument();
+    });
+  });
+
+  describe("When the administrator clicks on its delete button", () => {
     test("Then it should call the action given to it", async () => {
       const expectedRenderedButton = ariaLabels.buttonDelete;
 
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" />,
+        storeWithAdminUser
+      );
 
       const deleteButton = screen.getByLabelText(expectedRenderedButton);
 
