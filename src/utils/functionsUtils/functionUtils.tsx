@@ -1,9 +1,12 @@
 import fetch from "node-fetch";
-import { BackPaintingsResponse } from "../../hooks/usePaintings/types";
-import { Paintings } from "../../types/paintingTypes";
+import {
+  BackDetailResponse,
+  BackPaintingsResponse,
+} from "../../hooks/usePaintings/types";
+import { Painting, Paintings } from "../../types/paintingTypes";
 import definedResponses from "../responseUtils/responseUtils";
 
-const getPaintingsData = async (): Promise<Paintings> => {
+export const getPaintingsData = async (): Promise<Paintings> => {
   const response = await fetch(
     "https://dani-setien-final-project-back-202301-bcn.onrender.com/paintings"
   );
@@ -17,4 +20,16 @@ const getPaintingsData = async (): Promise<Paintings> => {
   return paintings;
 };
 
-export default getPaintingsData;
+export const getDetailData = async (id: string): Promise<Painting> => {
+  const response = await fetch(
+    `https://dani-setien-final-project-back-202301-bcn.onrender.com/paintings/${id}`
+  );
+
+  if (!response.ok) {
+    throw new Error(definedResponses.internalServerError.message);
+  }
+
+  const { painting } = (await response.json()) as BackDetailResponse;
+
+  return painting;
+};

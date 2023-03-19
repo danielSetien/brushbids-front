@@ -1,26 +1,44 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import usePaintings from "../../hooks/usePaintings/usePaintings";
-import { useAppSelector } from "../../store/hooks";
 import Header from "../../components/Header/Header";
 import Image from "next/image";
 import DetailPageStyled from "../../styles/pages/DetailPageStyled";
 import { TbCertificate } from "react-icons/tb";
 import { HiOutlinePaintBrush } from "react-icons/hi2";
+import {
+  getDetailData,
+  getPaintingsData,
+} from "../../utils/functionsUtils/functionUtils";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { Painting } from "../../types/paintingTypes";
+import { store } from "../../store";
+import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
 
-const DetailPage = (): JSX.Element => {
-  const { getDetail } = usePaintings();
-  const {
-    query: { id },
-  } = useRouter();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paintingsData = await getPaintingsData();
 
-  useEffect(() => {
-    if (id) {
-      getDetail(id as string);
-    }
-  }, [getDetail, id]);
+  const paths = paintingsData.map((painting) => {
+    return {
+      params: { id: painting.id },
+    };
+  });
 
-  const {
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const id = context.params!.id;
+  const painting = await getDetailData(id as string);
+
+  store.dispatch(loadDetailActionCreator(painting));
+  return {
+    props: { painting },
+  };
+};
+
+const DetailPage = (painting: { painting: Painting }): JSX.Element => {
+  let {
     author,
     certificate,
     condition,
@@ -40,7 +58,7 @@ const DetailPage = (): JSX.Element => {
     width,
     year,
     bidCount,
-  } = useAppSelector((state) => state.paintings.paintingDetail);
+  } = painting.painting;
 
   return (
     <DetailPageStyled className="detail">
