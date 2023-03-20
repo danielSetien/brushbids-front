@@ -9,8 +9,6 @@ import {
 } from "../../utils/functionsUtils/functionUtils";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Painting } from "../../types/paintingTypes";
-import { store } from "../../store";
-import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,7 +30,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params!.id;
   const painting = await getDetailData(id as string);
 
-  store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
   };
@@ -72,6 +69,7 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
             width={+width!}
             height={+height!}
             className="image"
+            priority
           />
         )}
         <div className="detail__information-section">
