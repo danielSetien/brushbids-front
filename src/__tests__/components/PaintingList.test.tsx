@@ -30,4 +30,28 @@ describe("Given a PaintingList component", () => {
       expect(secondPainting).toBeInTheDocument();
     });
   });
+
+  describe("When there is 10 paintings to render", () => {
+    test("Them the image for the 10th painting should be lazy-loaded", () => {
+      const anyPainting = mockPaintings[0];
+      const firstNinePaintings = Array(9).fill(anyPainting);
+      const tenthPainting = mockPaintings[1];
+      const paintings = [...firstNinePaintings, tenthPainting];
+
+      const storeWithTenPaintings = {
+        paintings: {
+          ...initialPaintingsState,
+          paintings: paintings,
+        },
+      };
+
+      renderWithProviders(<PaintingsList />, storeWithTenPaintings);
+
+      const tenthPaintingImage = screen.getByRole("img", {
+        name: tenthPainting.name,
+      });
+
+      expect(tenthPaintingImage).toHaveAttribute("loading", "lazy");
+    });
+  });
 });
