@@ -1,5 +1,6 @@
 import { screen, waitFor } from "@testing-library/react";
 import DetailPage from "../../pages/paintings/[id]";
+import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
@@ -27,6 +28,34 @@ describe("Given a DetailPage", () => {
         });
 
         expect(image).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("When rendering a painting that is not signed", () => {
+    test("Then it should show the text 'Is not signed'", async () => {
+      const expectedText = feedbackUtils.paintings.signature.false;
+
+      renderWithProviders(<DetailPage painting={mockPaintings[2]} />);
+
+      await waitFor(() => {
+        const text = screen.getByText(expectedText);
+
+        expect(text).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("When rendering a painting that is not framed", () => {
+    test("Then it should show the text 'Is not framed'", async () => {
+      const expectedText = feedbackUtils.paintings.frame.false;
+
+      renderWithProviders(<DetailPage painting={mockPaintings[3]} />);
+
+      await waitFor(() => {
+        const text = screen.getByText(expectedText);
+
+        expect(text).toBeInTheDocument();
       });
     });
   });

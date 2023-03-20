@@ -23,4 +23,27 @@ describe("Given a Layout component", () => {
       expect(loginButton).toBeInTheDocument();
     });
   });
+
+  describe("When the page is loading", () => {
+    test("Then it should show a loading bar", () => {
+      const expectedLoadingElementClassname = "progress bar";
+
+      const storeWithLoadingState = {
+        ui: {
+          isLoading: true,
+        },
+      };
+
+      renderWithProviders(
+        <Layout>
+          <LoginPage />
+        </Layout>,
+        storeWithLoadingState
+      );
+
+      const loader = screen.getByLabelText(expectedLoadingElementClassname);
+
+      expect(loader).toBeInTheDocument();
+    });
+  });
 });

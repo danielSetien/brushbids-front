@@ -11,6 +11,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { Painting } from "../../types/paintingTypes";
 import { store } from "../../store";
 import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
+import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paintingsData = await getPaintingsData();
@@ -97,7 +98,7 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
             <span className="price">
               {price &&
                 `$${price.toLocaleString()} ${
-                  bidCount ? `(${bidCount} bids)` : ""
+                  bidCount !== "0" && `(${bidCount} bids)`
                 }`}
             </span>
             <button className="button--secondary bid button">Bid</button>
@@ -123,15 +124,19 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
               <li className="characteristics__value">{medium}</li>
               <li className="characteristics__value">{condition}</li>
               <li className="characteristics__value">
-                {signature ? "Is signed by the author" : "Is not signed"}
+                {signature === "true"
+                  ? feedbackUtils.paintings.signature.true
+                  : feedbackUtils.paintings.signature.false}
               </li>
               <li className="characteristics__value">
-                {certificate
-                  ? "Includes a Certificate of Authenticity"
-                  : "Does not include a Certificate of Authenticity"}
+                {certificate === "true"
+                  ? feedbackUtils.paintings.certificate.true
+                  : feedbackUtils.paintings.certificate.false}
               </li>
               <li className="characteristics__value">
-                {frame ? "Is framed" : "Is not framed"}
+                {frame === "true"
+                  ? feedbackUtils.paintings.frame.true
+                  : feedbackUtils.paintings.frame.false}
               </li>
             </ol>
           </section>

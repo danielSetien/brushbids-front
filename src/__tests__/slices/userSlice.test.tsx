@@ -12,6 +12,7 @@ describe("Given a loginUser function", () => {
         id: "1",
         token: "token",
         username: "felixBauhaus",
+        administrator: false,
       };
 
       const expectedMockUserState: UserState = {
@@ -19,6 +20,7 @@ describe("Given a loginUser function", () => {
         token: "token",
         username: "felixBauhaus",
         isLogged: true,
+        administrator: false,
       };
 
       const loginUserAction = loginUserActionCreator(mockUser);

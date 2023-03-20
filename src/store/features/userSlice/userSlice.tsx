@@ -6,6 +6,7 @@ export const initialUserState: UserState = {
   token: "",
   id: "",
   isLogged: false,
+  administrator: false,
 };
 
 const userSlice = createSlice({

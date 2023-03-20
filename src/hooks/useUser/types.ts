@@ -7,4 +7,5 @@ export interface BackLoginResponse {
 export interface TokenPayload extends JwtPayload {
   id: string;
   username: string;
+  administrator: boolean;
 }
