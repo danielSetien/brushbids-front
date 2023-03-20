@@ -9,8 +9,6 @@ import {
 } from "../../utils/functionsUtils/functionUtils";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Painting } from "../../types/paintingTypes";
-import { store } from "../../store";
-import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 
 export const getStaticPaths: GetStaticPaths = async () => {

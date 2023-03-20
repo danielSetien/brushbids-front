@@ -11,12 +11,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const paintingsData = await getPaintingsData();
 
   const store = setupStore();
-  await store.dispatch(loadPaintingsActionCreator(paintingsData));
+  store.dispatch(loadPaintingsActionCreator(paintingsData));
 
   return {
     props: {
       initialState: store.getState(),
     },
+    revalidate: 30,
   };
 };
 
