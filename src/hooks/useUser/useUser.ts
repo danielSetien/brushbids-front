@@ -46,12 +46,13 @@ const useUser = (): UseUserStructure => {
       const { token } = (await backResponse.json()) as BackLoginResponse;
 
       const tokenPayload: TokenPayload = decodeToken(token);
-      const { id, username } = tokenPayload;
+      const { id, username, administrator } = tokenPayload;
 
       const user: User = {
         id,
         username,
         token,
+        administrator,
       };
 
       dispatch(loginUserActionCreator(user));
