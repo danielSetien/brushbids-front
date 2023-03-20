@@ -2,7 +2,7 @@ import LoaderStyled from "./LoaderStyled";
 
 const Loader = (): JSX.Element => {
   return (
-    <LoaderStyled className="progress-bar">
+    <LoaderStyled className="progress-bar" aria-label="progress bar">
       <div>
         <div
           className="progress-bar__progress"
