@@ -3,11 +3,13 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import Layout from "../components/Layout/Layout";
-import { store } from "../store";
+import { setupStore } from "../store";
 import GlobalStyles from "../styles/GlobalStyles";
 import theme from "../styles/theme";
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+  const store = setupStore(pageProps.initialState);
+
   return (
     <>
       <Head>

@@ -32,7 +32,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params!.id;
   const painting = await getDetailData(id as string);
 
-  store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
   };
@@ -72,6 +71,7 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
             width={+width!}
             height={+height!}
             className="image"
+            priority
           />
         )}
         <div className="detail__information-section">

@@ -4,15 +4,19 @@ import Header from "../components/Header/Header";
 import HomePageStyled from "../styles/pages/HomePageStyled";
 import { ToastContainer } from "react-toastify";
 import { getPaintingsData } from "../utils/functionsUtils/functionUtils";
+import { setupStore } from "../store";
+import { loadPaintingsActionCreator } from "../store/features/paintingsSlice/paintingsSlice";
 
 export const getStaticProps: GetStaticProps = async () => {
   const paintingsData = await getPaintingsData();
 
+  const store = setupStore();
+  await store.dispatch(loadPaintingsActionCreator(paintingsData));
+
   return {
     props: {
-      paintingsData,
+      initialState: store.getState(),
     },
-    revalidate: 1,
   };
 };
 
