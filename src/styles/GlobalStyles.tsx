@@ -31,6 +31,8 @@ const GlobalStyles = createGlobalStyle`
     border: none;
   }
 
+ 
+
   .button {
     cursor: pointer;
 

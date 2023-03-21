@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const NotFoundPageStyled = styled.div`
-  width: ${(props) => props.theme.page.width};
+  width: 100vw;
 
   padding-left: ${(props) => props.theme.page.padding};
   padding-right: ${(props) => props.theme.page.padding};
