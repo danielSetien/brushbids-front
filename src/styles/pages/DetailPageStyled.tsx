@@ -154,13 +154,31 @@ const DetailPageStyled = styled.div`
   @media screen and (min-width: 1000px) {
     .detail {
       &__information-section {
-        margin-left: 68px;
+        margin-left: 23px;
+        margin-right: 23px;
       }
+    }
+
+    .image {
+      margin-left: 23px;
+      margin-right: 23px;
     }
   }
 
   @media screen and (min-width: ${(props) => props.theme.breakpoint.medium}) {
     min-width: 100vw;
+
+    .detail {
+      &__information-section {
+        margin-left: 68px;
+        margin-right: 0px;
+      }
+    }
+
+    .image {
+      margin-left: 0;
+      margin-right: 0;
+    }
 
     .container {
       justify-content: space-between;
