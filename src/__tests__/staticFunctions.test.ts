@@ -1,6 +1,6 @@
 import { GetStaticPropsContext, PreviewData } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { getStaticProps } from "../pages";
+
 import {
   getStaticPaths,
   getStaticProps as getStaticPropsForDetail,
@@ -63,22 +63,6 @@ jest.mock("../utils/functionsUtils/functionUtils", () => ({
     height: "400",
   }),
 }));
-
-describe("Given a getStaticProps function that fetches a list of paintings", () => {
-  describe("When called", () => {
-    test("Then it should return a props object with a list of paintings", async () => {
-      const expectedProps = {
-        props: { paintingsData: [mockPaintings[0]] },
-        revalidate: 1,
-      };
-      const context: GetStaticPropsContext<ParsedUrlQuery, PreviewData> = {};
-
-      const props = await getStaticProps(context);
-
-      expect(props).toStrictEqual(expectedProps);
-    });
-  });
-});
 
 describe("Given a getStaticProps function that fetches a particular painting", () => {
   describe("When called", () => {

@@ -103,8 +103,8 @@ const usePaintings = (): UsePaintingsStructure => {
       dispatch(createPaintingActionCreator(response));
 
       displaySuccessModal(feedbackUtils.success.creationMessage);
-    } catch (error: unknown) {
-      displayErrorModal((error as Error).message);
+    } catch {
+      displayErrorModal(definedResponses.internalServerError.message);
     }
   };
 

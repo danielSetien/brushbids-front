@@ -62,10 +62,10 @@ const useUser = (): UseUserStructure => {
       dispatch(unsetIsLoadingActionCreator());
 
       router.push(homePage);
-    } catch (error: unknown) {
+    } catch {
       dispatch(unsetIsLoadingActionCreator());
 
-      displayErrorModal((error as Error).message);
+      displayErrorModal(definedResponses.internalServerError.message);
     }
   };
 

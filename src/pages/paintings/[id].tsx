@@ -122,17 +122,17 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
               <li className="characteristics__value">{medium}</li>
               <li className="characteristics__value">{condition}</li>
               <li className="characteristics__value">
-                {signature === "true"
+                {signature === "yes"
                   ? feedbackUtils.paintings.signature.true
                   : feedbackUtils.paintings.signature.false}
               </li>
               <li className="characteristics__value">
-                {certificate === "true"
+                {certificate === "yes"
                   ? feedbackUtils.paintings.certificate.true
                   : feedbackUtils.paintings.certificate.false}
               </li>
               <li className="characteristics__value">
-                {frame === "true"
+                {frame === "yes"
                   ? feedbackUtils.paintings.frame.true
                   : feedbackUtils.paintings.frame.false}
               </li>

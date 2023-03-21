@@ -8,7 +8,6 @@ const CreateFormPage = () => {
     <>
       <ToastContainer />
       <CreateFormPageStyled>
-        <Header />
         <CreateForm />
       </CreateFormPageStyled>
     </>

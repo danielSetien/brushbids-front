@@ -58,7 +58,7 @@ describe("Given a CreateForm component", () => {
     });
   });
 
-  describe("When the user selects the Certificate field and sets it to 'true'", () => {
+  describe("When the user selects the Certificate field and sets it to 'yes'", () => {
     test("Then the Certificate input value should be 'true'", async () => {
       const selectedValue = "true";
 

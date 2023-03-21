@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const HomePageStyled = styled.div`
-  min-width: 95.9vw;
+  min-width: 95vw;
+
   padding-left: ${(props) => props.theme.page.padding};
   padding-right: ${(props) => props.theme.page.padding};
 
