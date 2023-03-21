@@ -5,9 +5,6 @@ import {
   getStaticPaths,
   getStaticProps as getStaticPropsForDetail,
 } from "../pages/paintings/[id]";
-import { initialPaintingsState } from "../store/features/paintingsSlice/paintingsSlice";
-import { initialUserState } from "../store/features/userSlice/userSlice";
-import { initialUiState } from "../store/features/userUi/uiSlice";
 
 import { mockPaintings } from "../utils/testUtils/mockHardcodedData";
 
@@ -71,19 +68,9 @@ describe("Given a getStaticProps function that fetches a list of paintings", () 
   describe("When called", () => {
     test("Then it should return a props object with a list of paintings", async () => {
       const expectedProps = {
-        props: {
-          initialState: {
-            paintings: {
-              ...initialPaintingsState,
-              paintings: [mockPaintings[0]],
-            },
-            ui: { ...initialUiState },
-            user: { ...initialUserState },
-          },
-        },
-        revalidate: 30,
+        props: { paintingsData: [mockPaintings[0]] },
+        revalidate: 1,
       };
-
       const context: GetStaticPropsContext<ParsedUrlQuery, PreviewData> = {};
 
       const props = await getStaticProps(context);
