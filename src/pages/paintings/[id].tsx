@@ -70,6 +70,7 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
             width={+width!}
             height={+height!}
             className="image"
+            priority
           />
         )}
         <div className="detail__information-section">
@@ -122,17 +123,17 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
               <li className="characteristics__value">{medium}</li>
               <li className="characteristics__value">{condition}</li>
               <li className="characteristics__value">
-                {signature === "yes"
+                {signature === "true"
                   ? feedbackUtils.paintings.signature.true
                   : feedbackUtils.paintings.signature.false}
               </li>
               <li className="characteristics__value">
-                {certificate === "yes"
+                {certificate === "true"
                   ? feedbackUtils.paintings.certificate.true
                   : feedbackUtils.paintings.certificate.false}
               </li>
               <li className="characteristics__value">
-                {frame === "yes"
+                {frame === "true"
                   ? feedbackUtils.paintings.frame.true
                   : feedbackUtils.paintings.frame.false}
               </li>

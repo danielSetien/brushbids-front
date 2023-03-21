@@ -30,6 +30,8 @@ const usePaintings = (): UsePaintingsStructure => {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
   const { paintingsEndpoint, createEndpoint } = backRouteUtils;
 
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
   const getPaintings = useCallback(async () => {
     try {
       const response = await fetch(`${apiUrl}${paintingsEndpoint}`);
@@ -87,17 +89,10 @@ const usePaintings = (): UsePaintingsStructure => {
   };
 
   const createPainting = async (paintingData: FormData) => {
-    let requestConfig = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
     try {
       const response: Painting = await axios.post(
         `${apiUrl}${createEndpoint}`,
-        paintingData,
-        requestConfig
+        paintingData
       );
 
       dispatch(createPaintingActionCreator(response));
