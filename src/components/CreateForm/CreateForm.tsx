@@ -189,8 +189,8 @@ const CreateForm = (): JSX.Element => {
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
-        <option value="true">True</option>
-        <option value="false">False</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
       </select>
 
       <label htmlFor="certificate">Certificate</label>
@@ -201,8 +201,8 @@ const CreateForm = (): JSX.Element => {
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
-        <option value="true">True</option>
-        <option value="false">False</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
       </select>
 
       <label htmlFor="rarity">Rarity</label>
@@ -237,8 +237,8 @@ const CreateForm = (): JSX.Element => {
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
-        <option value="true">True</option>
-        <option value="false">False</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
       </select>
 
       <label htmlFor="frame">Frame</label>
@@ -249,17 +249,13 @@ const CreateForm = (): JSX.Element => {
         onChange={handleFormSelectsChange}
       >
         <option value="" hidden></option>
-        <option value="true">True</option>
-        <option value="false">False</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
       </select>
 
       <label htmlFor="image">Image</label>
       <label htmlFor="image" className="field faux-placeholder">
-        {image
-          ? image.toString().split("\\")[
-              image.toString().split("\\").length - 1
-            ]
-          : "Introduce an image"}
+        {image ? image.name : "Introduce an image"}
         <AiOutlineFolderAdd className="icon" />
       </label>
       <input

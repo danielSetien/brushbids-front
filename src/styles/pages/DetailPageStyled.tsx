@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const DetailPageStyled = styled.div`
-  min-width: 96vw;
+  min-width: 95vw;
   padding-left: ${(props) => props.theme.page.padding};
   padding-right: ${(props) => props.theme.page.padding};
 

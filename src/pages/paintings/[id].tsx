@@ -70,6 +70,7 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
             width={+width!}
             height={+height!}
             className="image"
+            priority
           />
         )}
         <div className="detail__information-section">
