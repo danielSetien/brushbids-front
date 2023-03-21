@@ -1,6 +1,5 @@
 import { GetStaticProps } from "next";
 import PaintingsList from "../components/PaintingsList/PaintingsList";
-import Header from "../components/Header/Header";
 import HomePageStyled from "../styles/pages/HomePageStyled";
 import { ToastContainer } from "react-toastify";
 import { getPaintingsData } from "../utils/functionsUtils/functionUtils";
@@ -21,7 +20,6 @@ const HomePage = (): JSX.Element => {
     <>
       <HomePageStyled>
         <ToastContainer />
-        <Header />
         <h3 className="section-title">All works from this auction</h3>
         <PaintingsList />
       </HomePageStyled>

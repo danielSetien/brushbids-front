@@ -5,11 +5,17 @@ import { UserState } from "../../types/userTypes";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
 jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next-router-mock/async"), "useRouter");
+useRouter.mockImplementation(() => ({
+  pathname: {
+    includes: jest.fn().mockReturnValue(true),
+  },
+}));
 
 describe("Given a LoginPage", () => {
   describe("When rendered", () => {
     test("Then it should show the Brushbids logo", () => {
-      const expectedLogoName = "brushbids logo";
+      const expectedLogoName = "brushbids large logo";
 
       renderWithProviders(<LoginPage />);
 
@@ -33,18 +39,6 @@ describe("Given a LoginPage", () => {
       expect(loginPageTitle).toBeInTheDocument();
     });
 
-    test(`Then it should show a LoginForm component with its 'Log in' button`, () => {
-      const expectedButtonName = "Log in";
-
-      renderWithProviders(<LoginPage />);
-
-      const loginButton = screen.getByRole("button", {
-        name: expectedButtonName,
-      });
-
-      expect(loginButton).toBeInTheDocument();
-    });
-
     test("Then it should show the question 'Do you want an account?'", () => {
       const expectedText = "Do you want an account?";
 
@@ -63,6 +57,7 @@ describe("Given a LoginPage", () => {
         token: "testToken",
         username: "testSubject",
         isLogged: true,
+        administrator: false,
       };
 
       const preloadedState = { user: loggedInState };

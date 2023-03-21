@@ -1,4 +1,3 @@
-import Header from "../../components/Header/Header";
 import Image from "next/image";
 import DetailPageStyled from "../../styles/pages/DetailPageStyled";
 import { TbCertificate } from "react-icons/tb";
@@ -64,7 +63,6 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
   return (
     <DetailPageStyled className="detail">
       <div className="container">
-        <Header />
         {image && (
           <Image
             src={image}

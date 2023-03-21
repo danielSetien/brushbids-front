@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 const LoginPageStyled = styled.div`
+  min-width: 100vw;
+  padding-left: ${(props) => props.theme.page.padding};
+  padding-right: ${(props) => props.theme.page.padding};
+
   display: flex;
   flex-direction: column;
 
@@ -14,6 +18,13 @@ const LoginPageStyled = styled.div`
   }
 
   .login-page {
+    &__container {
+      max-width: 600px;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+    }
+
     &__title {
       font-size: ${(props) => props.theme.fontSize.title};
       line-height: ${(props) => props.theme.lineHeight.title};

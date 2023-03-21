@@ -4,7 +4,9 @@ const LoginFormStyled = styled.form`
   display: flex;
   flex-direction: column;
 
-  width: 100%;
+  .field {
+    flex: 1;
+  }
 `;
 
 export default LoginFormStyled;

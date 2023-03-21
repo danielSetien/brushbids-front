@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
 const DetailPageStyled = styled.div`
+  min-width: 96vw;
   padding-left: ${(props) => props.theme.page.padding};
   padding-right: ${(props) => props.theme.page.padding};
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   .container {
     display: flex;
@@ -162,6 +159,8 @@ const DetailPageStyled = styled.div`
   }
 
   @media screen and (min-width: ${(props) => props.theme.breakpoint.medium}) {
+    min-width: 100vw;
+
     .container {
       justify-content: space-between;
     }

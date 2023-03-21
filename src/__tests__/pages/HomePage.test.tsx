@@ -6,16 +6,16 @@ jest.mock("next/router", () => require("next-router-mock"));
 
 describe("Given a HomePage", () => {
   describe("When rendered", () => {
-    test("Then it should show a header with the Brushbids logo", () => {
-      const expectedLogoName = "brushbids logo";
+    test("Then it should show the title 'All works from this auction'", () => {
+      const expectedTitleName = "All works from this auction";
 
       renderWithProviders(<HomePage />);
 
-      const expectedLogo = screen.getByRole("img", {
-        name: expectedLogoName,
+      const expectedTitle = screen.getByRole("heading", {
+        name: expectedTitleName,
       });
 
-      expect(expectedLogo).toBeInTheDocument();
+      expect(expectedTitle).toBeInTheDocument();
     });
   });
 });
