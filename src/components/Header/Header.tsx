@@ -6,9 +6,7 @@ import LogButton from "../LogButton/LogButton";
 import HeaderStyled from "./HeaderStyled";
 
 const Header = (): JSX.Element => {
-  const { isLogged, username, administrator } = useAppSelector(
-    (state) => state.user
-  );
+  const { isLogged, administrator } = useAppSelector((state) => state.user);
 
   return (
     <HeaderStyled>

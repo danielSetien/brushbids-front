@@ -116,4 +116,21 @@ describe("Given a PaintingCard component", () => {
       expect(spy).toHaveBeenCalled();
     });
   });
+
+  describe("When the administrator clicks on its edit button", () => {
+    test("Then it should call the action given to it", async () => {
+      const expectedRenderedButton = ariaLabels.buttonEdit;
+
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" />,
+        storeWithAdminUser
+      );
+
+      const deleteButton = screen.getByLabelText(expectedRenderedButton);
+
+      await act(async () => await userEvent.click(deleteButton));
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });

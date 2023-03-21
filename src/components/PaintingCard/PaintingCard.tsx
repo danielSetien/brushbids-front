@@ -20,7 +20,7 @@ const PaintingCard = ({
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
   const { deletePainting } = usePaintings();
-  const { username, administrator } = useAppSelector((state) => state.user);
+  const { administrator } = useAppSelector((state) => state.user);
 
   return (
     <>
