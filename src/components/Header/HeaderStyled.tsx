@@ -5,8 +5,6 @@ const HeaderStyled = styled.nav`
   flex-wrap: wrap;
   align-items: center;
 
-  width: 100%;
-
   font-size: ${(props) => props.theme.fontSize.title};
 
   justify-content: space-between;

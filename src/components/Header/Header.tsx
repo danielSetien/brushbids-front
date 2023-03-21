@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useAppSelector } from "../../store/hooks";
 import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import LogButton from "../LogButton/LogButton";
@@ -7,6 +8,7 @@ import HeaderStyled from "./HeaderStyled";
 
 const Header = (): JSX.Element => {
   const { isLogged, administrator } = useAppSelector((state) => state.user);
+  const router = useRouter();
 
   return (
     <HeaderStyled>
@@ -27,8 +29,9 @@ const Header = (): JSX.Element => {
           Add
         </Link>
       )}
-
-      <LogButton isLogged={isLogged} />
+      {!router.pathname.includes(frontRouteUtils.loginPage) && (
+        <LogButton isLogged={isLogged} />
+      )}
     </HeaderStyled>
   );
 };

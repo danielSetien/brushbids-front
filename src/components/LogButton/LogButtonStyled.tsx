@@ -5,7 +5,6 @@ const LogButtonStyled = styled.div`
   order: -1;
 
   .button {
-    margin-bottom: 20px;
     margin-top: 10px;
   }
 
