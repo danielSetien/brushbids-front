@@ -6,7 +6,6 @@ import useUser from "../../hooks/useUser/useUser";
 import { useAppSelector } from "../../store/hooks";
 import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import LoginPageStyled from "../../styles/pages/LoginPageStyled";
-import Header from "../../components/Header/Header";
 
 const LoginPage = () => {
   const { loginUser } = useUser();
@@ -21,11 +20,10 @@ const LoginPage = () => {
   return (
     <LoginPageStyled className="login-page">
       <ToastContainer />
-      <Header />
       <section className="login-page__container">
         <Image
           src={"/img/brushbids-full-logo.webp"}
-          alt="brushbids logo"
+          alt="brushbids large logo"
           width={200}
           height={200}
           priority

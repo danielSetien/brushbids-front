@@ -4,23 +4,25 @@ import LoginPage from "../../pages/login";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
 jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next-router-mock/async"), "useRouter");
+useRouter.mockImplementation(() => ({
+  pathname: {
+    includes: jest.fn().mockReturnValue(false),
+  },
+}));
 
 describe("Given a Layout component", () => {
   describe("When rendered with a LoginPage inside", () => {
-    test("Then it should show the Log in Form button", () => {
-      const expectedButtonName = "Log in";
+    test("Then it should show the Brushbids logo", () => {
+      const expectedLogoName = "brushbids large logo";
 
-      renderWithProviders(
-        <Layout>
-          <LoginPage />
-        </Layout>
-      );
+      renderWithProviders(<LoginPage />);
 
-      const loginButton = screen.getByRole("button", {
-        name: expectedButtonName,
+      const brushbidsLogo = screen.getByRole("img", {
+        name: expectedLogoName,
       });
 
-      expect(loginButton).toBeInTheDocument();
+      expect(brushbidsLogo).toBeInTheDocument();
     });
   });
 

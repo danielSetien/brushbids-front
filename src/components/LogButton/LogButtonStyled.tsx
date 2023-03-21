@@ -6,6 +6,7 @@ const LogButtonStyled = styled.div`
 
   .button {
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   @media screen and (min-width: ${(props) => props.theme.breakpoint.small}) {

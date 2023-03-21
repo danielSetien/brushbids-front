@@ -1,6 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import DetailPage from "../../pages/paintings/[id]";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
+import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
@@ -12,6 +13,9 @@ const useRouter = jest.spyOn(require("next-router-mock/async"), "useRouter");
 useRouter.mockImplementation(() => ({
   query: {
     id: paintingDetail.id,
+  },
+  pathname: {
+    includes: jest.fn().mockReturnValue(true),
   },
 }));
 
