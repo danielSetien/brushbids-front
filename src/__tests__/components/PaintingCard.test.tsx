@@ -6,7 +6,6 @@ import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 import { initialUserState } from "../../store/features/userSlice/userSlice";
-import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 const painting = mockPaintings[0];
 
@@ -20,7 +19,7 @@ describe("Given a PaintingCard component", () => {
   const storeWithAdminUser = {
     user: {
       ...initialUserState,
-      username: administratorUsername,
+      administrator: true,
     },
   };
 
@@ -104,6 +103,23 @@ describe("Given a PaintingCard component", () => {
   describe("When the administrator clicks on its delete button", () => {
     test("Then it should call the action given to it", async () => {
       const expectedRenderedButton = ariaLabels.buttonDelete;
+
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" />,
+        storeWithAdminUser
+      );
+
+      const deleteButton = screen.getByLabelText(expectedRenderedButton);
+
+      await act(async () => await userEvent.click(deleteButton));
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the administrator clicks on its edit button", () => {
+    test("Then it should call the action given to it", async () => {
+      const expectedRenderedButton = ariaLabels.buttonEdit;
 
       renderWithProviders(
         <PaintingCard painting={painting} loading="lazy" />,

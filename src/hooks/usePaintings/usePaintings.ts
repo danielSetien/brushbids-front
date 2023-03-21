@@ -8,7 +8,7 @@ import {
   loadDetailActionCreator,
   loadPaintingsActionCreator,
 } from "../../store/features/paintingsSlice/paintingsSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
 import { BackDetailResponse, BackPaintingsResponse } from "./types";
 import definedResponses from "../../utils/responseUtils/responseUtils";
@@ -25,6 +25,7 @@ interface UsePaintingsStructure {
 
 const usePaintings = (): UsePaintingsStructure => {
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.user);
 
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
   const { paintingsEndpoint, createEndpoint } = backRouteUtils;
@@ -68,6 +69,9 @@ const usePaintings = (): UsePaintingsStructure => {
     try {
       const response = await fetch(`${apiUrl}${paintingsEndpoint}/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!response.ok) {
@@ -83,10 +87,17 @@ const usePaintings = (): UsePaintingsStructure => {
   };
 
   const createPainting = async (paintingData: FormData) => {
+    let requestConfig = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     try {
       const response: Painting = await axios.post(
         `${apiUrl}${createEndpoint}`,
-        paintingData
+        paintingData,
+        requestConfig
       );
 
       dispatch(createPaintingActionCreator(response));

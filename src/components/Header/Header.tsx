@@ -2,12 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppSelector } from "../../store/hooks";
 import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
-import { administratorUsername } from "../../utils/userUtils/userUtils";
 import LogButton from "../LogButton/LogButton";
 import HeaderStyled from "./HeaderStyled";
 
 const Header = (): JSX.Element => {
-  const { isLogged, username } = useAppSelector((state) => state.user);
+  const { isLogged, administrator } = useAppSelector((state) => state.user);
 
   return (
     <HeaderStyled>
@@ -23,7 +22,7 @@ const Header = (): JSX.Element => {
       <Link className="navigation-link" href={frontRouteUtils.homePage}>
         Home
       </Link>
-      {username === administratorUsername && (
+      {administrator && (
         <Link className="navigation-link" href={frontRouteUtils.createPage}>
           Add
         </Link>
