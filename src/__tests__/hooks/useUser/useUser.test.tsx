@@ -36,6 +36,7 @@ const userCredentials: UserCredentials = {
 const mockTokenPayload: TokenPayload = {
   id: "2",
   username: "felixBauhaus",
+  administrator: false,
 };
 
 describe("Given a loginUser function", () => {
