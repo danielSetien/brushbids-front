@@ -8,7 +8,6 @@ import PaintingCardStyled from "./PaintingCardStyled";
 import Link from "next/link";
 import usePaintings from "../../hooks/usePaintings/usePaintings";
 import { useAppSelector } from "../../store/hooks";
-import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 interface PaintingCardProps {
   painting: Painting;
@@ -21,7 +20,7 @@ const PaintingCard = ({
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
   const { deletePainting } = usePaintings();
-  const { username } = useAppSelector((state) => state.user);
+  const { username, administrator } = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -37,7 +36,7 @@ const PaintingCard = ({
               loading={loading}
             />
           </Link>
-          {username === administratorUsername && (
+          {administrator && (
             <>
               <Button
                 className="button edit"

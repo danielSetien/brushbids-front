@@ -3,7 +3,6 @@ import Header from "../../components/Header/Header";
 import { initialUserState } from "../../store/features/userSlice/userSlice";
 import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
-import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 jest.mock("next/router", () => require("next-router-mock"));
 
@@ -61,7 +60,7 @@ describe("Given a Header component", () => {
       const storeWithAdminUser = {
         user: {
           ...initialUserState,
-          username: administratorUsername,
+          administrator: true,
         },
       };
 

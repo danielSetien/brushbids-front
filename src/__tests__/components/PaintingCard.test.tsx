@@ -6,7 +6,6 @@ import { ariaLabels } from "../../utils/componentUtils/componentUtils";
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 import { initialUserState } from "../../store/features/userSlice/userSlice";
-import { administratorUsername } from "../../utils/userUtils/userUtils";
 
 const painting = mockPaintings[0];
 
@@ -20,7 +19,7 @@ describe("Given a PaintingCard component", () => {
   const storeWithAdminUser = {
     user: {
       ...initialUserState,
-      username: administratorUsername,
+      administrator: true,
     },
   };
 
