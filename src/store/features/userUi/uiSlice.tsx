@@ -26,7 +26,7 @@ const uiSlice = createSlice({
       isLoading: false,
     }),
 
-    setButtonIsLoading: (
+    setSubmitIsLoading: (
       currentUserState: UiState,
       action: PayloadAction<void>
     ): UiState => ({
@@ -34,7 +34,7 @@ const uiSlice = createSlice({
       buttonIsLoading: true,
     }),
 
-    unsetButtonIsLoading: (
+    unsetSubmitIsLoading: (
       currentUserState: UiState,
       action: PayloadAction<void>
     ): UiState => ({
@@ -47,8 +47,8 @@ const uiSlice = createSlice({
 export const {
   setIsLoading: setIsLoadingActionCreator,
   unsetIsLoading: unsetIsLoadingActionCreator,
-  setButtonIsLoading: setButtonIsLoadingActionCreator,
-  unsetButtonIsLoading: unsetButtonIsLoadingActionCreator,
+  setSubmitIsLoading: setButtonIsLoadingActionCreator,
+  unsetSubmitIsLoading: unsetButtonIsLoadingActionCreator,
 } = uiSlice.actions;
 
 export const uiReducer = uiSlice.reducer;
