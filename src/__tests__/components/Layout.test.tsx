@@ -33,6 +33,7 @@ describe("Given a Layout component", () => {
       const storeWithLoadingState = {
         ui: {
           isLoading: true,
+          buttonIsLoading: false,
         },
       };
 

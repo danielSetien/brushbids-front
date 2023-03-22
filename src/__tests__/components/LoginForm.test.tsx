@@ -150,4 +150,28 @@ describe("Given a LoginForm component", () => {
       expect(loginButton).toHaveAttribute("disabled");
     });
   });
+
+  describe("When the user submits the form", () => {
+    test("Then the the button should show a spinning '/'", async () => {
+      const expectedButtonText = "/";
+
+      const storeWithButtonIsLoading = {
+        ui: {
+          buttonIsLoading: true,
+          isLoading: true,
+        },
+      };
+
+      renderWithProviders(
+        <LoginForm loginUser={mockLoginUser} />,
+        storeWithButtonIsLoading
+      );
+
+      const loginButton = screen.getByRole("button", {
+        name: expectedButtonText,
+      });
+
+      expect(loginButton).toHaveTextContent(expectedButtonText);
+    });
+  });
 });

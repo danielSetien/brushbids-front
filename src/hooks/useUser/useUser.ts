@@ -5,9 +5,7 @@ import displayErrorModal from "../../utils/componentUtils/modals/errorModal";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import {
   setButtonIsLoadingActionCreator,
-  setIsLoadingActionCreator,
   unsetButtonIsLoadingActionCreator,
-  unsetIsLoadingActionCreator,
 } from "../../store/features/userUi/uiSlice";
 import { useAppDispatch } from "../../store/hooks";
 import { User, UserCredentials } from "../../types/userTypes";
@@ -32,7 +30,6 @@ const useUser = (): UseUserStructure => {
   const { loginEndpoint } = backRouteUtils;
 
   const loginUser = async (userCredentials: UserCredentials) => {
-    dispatch(setIsLoadingActionCreator());
     dispatch(setButtonIsLoadingActionCreator());
 
     try {
@@ -62,12 +59,10 @@ const useUser = (): UseUserStructure => {
 
       localStorage.setItem("token", token);
 
-      dispatch(unsetIsLoadingActionCreator());
       dispatch(unsetButtonIsLoadingActionCreator());
 
       router.push(homePage);
     } catch (error: unknown) {
-      dispatch(unsetIsLoadingActionCreator());
       dispatch(unsetButtonIsLoadingActionCreator());
 
       displayErrorModal((error as Error).message);
