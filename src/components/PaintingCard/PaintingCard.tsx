@@ -26,16 +26,21 @@ const PaintingCard = ({
     <>
       <PaintingCardStyled key={id} role="listitem">
         <div className="image-container">
-          <Link href={`/paintings/${encodeURIComponent(id)}`} className="link">
-            <Image
-              src={image}
-              alt={name}
-              width={+width!}
-              height={+height!}
-              className="image"
-              loading={loading}
-            />
-          </Link>
+          {id && (
+            <Link
+              href={`/paintings/${encodeURIComponent(id)}`}
+              className="link"
+            >
+              <Image
+                src={image}
+                alt={name}
+                width={+width!}
+                height={+height!}
+                className="image"
+                loading={loading}
+              />
+            </Link>
+          )}
           {administrator && (
             <>
               <Button

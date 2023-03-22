@@ -9,12 +9,21 @@ import {
   loadPaintingsActionCreator,
 } from "../../store/features/paintingsSlice/paintingsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
-import { BackDetailResponse, BackPaintingsResponse } from "./types";
+import {
+  backRouteUtils,
+  frontRouteUtils,
+} from "../../utils/routeUtils/routeUtils";
+import {
+  AxiosPaintingResponse,
+  BackDetailResponse,
+  BackPaintingsResponse,
+} from "./types";
 import definedResponses from "../../utils/responseUtils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import { Painting } from "../../types/paintingTypes";
+import { useRouter } from "next/router";
+import pageUtils from "../../utils/pageUtils/pageUtils";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -26,6 +35,7 @@ interface UsePaintingsStructure {
 const usePaintings = (): UsePaintingsStructure => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.user);
+  const router = useRouter();
 
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
   const { paintingsEndpoint, createEndpoint } = backRouteUtils;
@@ -90,14 +100,17 @@ const usePaintings = (): UsePaintingsStructure => {
 
   const createPainting = async (paintingData: FormData) => {
     try {
-      const response: Painting = await axios.post(
+      const response: AxiosPaintingResponse = await axios.post(
         `${apiUrl}${createEndpoint}`,
         paintingData
       );
-
-      dispatch(createPaintingActionCreator(response));
+      dispatch(createPaintingActionCreator(response.data.newPainting));
 
       displaySuccessModal(feedbackUtils.success.creationMessage);
+
+      setTimeout(() => {
+        router.push(frontRouteUtils.homePage);
+      }, pageUtils.staticPages.revalidateSeconds * 1000);
     } catch {
       displayErrorModal(definedResponses.internalServerError.message);
     }

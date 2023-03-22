@@ -34,6 +34,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
+    revalidate: 1,
   };
 };
 

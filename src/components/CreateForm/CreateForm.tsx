@@ -77,8 +77,6 @@ const CreateForm = (): JSX.Element => {
     }
 
     createPainting(newPaintingData);
-
-    router.push(frontRouteUtils.homePage);
   };
 
   return (
