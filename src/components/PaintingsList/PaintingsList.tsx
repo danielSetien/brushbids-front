@@ -28,6 +28,7 @@ const PaintingsList = (): JSX.Element => {
             painting={painting}
             key={painting.id}
             loading={index < 9 ? "eager" : "lazy"}
+            index={index}
           />
         ))}
       </Masonry>

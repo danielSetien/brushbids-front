@@ -11,6 +11,7 @@ import { Painting } from "../../types/paintingTypes";
 import { store } from "../../store";
 import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
+import pageUtils from "../../utils/pageUtils/pageUtils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paintingsData = await getPaintingsData();
@@ -34,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
-    revalidate: 1,
+    revalidate: pageUtils.staticPages.revalidateSeconds,
   };
 };
 

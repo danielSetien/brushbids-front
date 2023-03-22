@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CreateFormPageStyled = styled.div`
-  width: 94vw;
+  width: 88vw;
   padding-left: ${(props) => props.theme.page.padding};
   padding-right: ${(props) => props.theme.page.padding};
 

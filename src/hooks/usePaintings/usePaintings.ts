@@ -24,6 +24,10 @@ import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import { Painting } from "../../types/paintingTypes";
 import { useRouter } from "next/router";
 import pageUtils from "../../utils/pageUtils/pageUtils";
+import {
+  setIsLoadingActionCreator,
+  unsetIsLoadingActionCreator,
+} from "../../store/features/userUi/uiSlice";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -78,6 +82,8 @@ const usePaintings = (): UsePaintingsStructure => {
   );
 
   const deletePainting = async (id: string) => {
+    dispatch(setIsLoadingActionCreator());
+
     try {
       const response = await fetch(`${apiUrl}${paintingsEndpoint}/${id}`, {
         method: "DELETE",
@@ -92,6 +98,8 @@ const usePaintings = (): UsePaintingsStructure => {
 
       dispatch(deletePaintingActionCreator(id));
 
+      dispatch(unsetIsLoadingActionCreator());
+
       displaySuccessModal(feedbackUtils.success.deletionMessage);
     } catch (error: unknown) {
       displayErrorModal((error as Error).message);
@@ -99,6 +107,8 @@ const usePaintings = (): UsePaintingsStructure => {
   };
 
   const createPainting = async (paintingData: FormData) => {
+    dispatch(setIsLoadingActionCreator());
+
     try {
       const response: AxiosPaintingResponse = await axios.post(
         `${apiUrl}${createEndpoint}`,
@@ -106,11 +116,11 @@ const usePaintings = (): UsePaintingsStructure => {
       );
       dispatch(createPaintingActionCreator(response.data.newPainting));
 
+      dispatch(unsetIsLoadingActionCreator());
+
       displaySuccessModal(feedbackUtils.success.creationMessage);
 
-      setTimeout(() => {
-        router.push(frontRouteUtils.homePage);
-      }, pageUtils.staticPages.revalidateSeconds * 1000);
+      router.push(frontRouteUtils.homePage);
     } catch {
       displayErrorModal(definedResponses.internalServerError.message);
     }

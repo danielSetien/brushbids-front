@@ -12,11 +12,13 @@ import { useAppSelector } from "../../store/hooks";
 interface PaintingCardProps {
   painting: Painting;
   loading: "eager" | "lazy";
+  index: number;
 }
 
 const PaintingCard = ({
   painting: { image, name, id, author, year, price, bidCount, width, height },
   loading,
+  index,
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
   const { deletePainting } = usePaintings();
@@ -38,6 +40,7 @@ const PaintingCard = ({
                 height={+height!}
                 className="image"
                 loading={loading}
+                priority={index === 1}
               />
             </Link>
           )}
