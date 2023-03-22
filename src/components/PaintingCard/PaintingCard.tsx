@@ -64,7 +64,7 @@ const PaintingCard = ({
           )}
         </div>
 
-        <section className="about">
+        <div className="about">
           <Link href={`/paintings/${encodeURIComponent(id)}`}>
             <div className="information">
               <span className="information__author">{author}</span>
@@ -74,7 +74,7 @@ const PaintingCard = ({
               </span>
             </div>
           </Link>
-        </section>
+        </div>
       </PaintingCardStyled>
     </>
   );

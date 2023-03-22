@@ -69,7 +69,7 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
           )
         }
       >
-        <div className={`button__content${buttonIsLoading && "--loading"}`}>
+        <div className={`button__content${buttonIsLoading ? "--loading" : ""}`}>
           {buttonIsLoading ? "/" : "Log in"}
         </div>
       </button>
