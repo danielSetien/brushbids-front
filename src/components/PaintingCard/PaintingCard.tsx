@@ -12,11 +12,13 @@ import { useAppSelector } from "../../store/hooks";
 interface PaintingCardProps {
   painting: Painting;
   loading: "eager" | "lazy";
+  index: number;
 }
 
 const PaintingCard = ({
-  painting: { image, name, id, author, year, price, bidCount, width, height },
+  painting: { image, name, id, author, year, price, width, height },
   loading,
+  index,
 }: PaintingCardProps): JSX.Element => {
   const { buttonEdit, buttonDelete } = ariaLabels;
   const { deletePainting } = usePaintings();
@@ -26,16 +28,22 @@ const PaintingCard = ({
     <>
       <PaintingCardStyled key={id} role="listitem">
         <div className="image-container">
-          <Link href={`/paintings/${encodeURIComponent(id)}`} className="link">
-            <Image
-              src={image}
-              alt={name}
-              width={+width!}
-              height={+height!}
-              className="image"
-              loading={loading}
-            />
-          </Link>
+          {id && (
+            <Link
+              href={`/paintings/${encodeURIComponent(id)}`}
+              className="link"
+            >
+              <Image
+                src={image}
+                alt={name}
+                width={+width!}
+                height={+height!}
+                className="image"
+                loading={loading}
+                priority={index === 1}
+              />
+            </Link>
+          )}
           {administrator && (
             <>
               <Button
@@ -62,10 +70,7 @@ const PaintingCard = ({
               <span className="information__author">{author}</span>
               <span className="information__name-and-year">{`${name}, ${year}`}</span>
               <span className="information__price-and-bids">
-                {price &&
-                  `$${price.toLocaleString()} ${
-                    bidCount ? `(${bidCount} bids)` : ""
-                  }`}
+                {price && `$${price.toLocaleString()}`}
               </span>
             </div>
           </Link>

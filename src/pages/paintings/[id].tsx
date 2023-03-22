@@ -11,6 +11,7 @@ import { Painting } from "../../types/paintingTypes";
 import { store } from "../../store";
 import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
+import pageUtils from "../../utils/pageUtils/pageUtils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paintingsData = await getPaintingsData();
@@ -34,6 +35,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
+    revalidate: pageUtils.staticPages.revalidateSeconds,
   };
 };
 
@@ -57,7 +59,6 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
     unique,
     width,
     year,
-    bidCount,
   } = painting.painting;
 
   return (
@@ -94,49 +95,64 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
                 Includes a Certificate of Authenticity
               </span>
             )}
-            <span className="price">
-              {price &&
-                `$${price.toLocaleString()} ${
-                  bidCount !== "0" && `(${bidCount} bids)`
-                }`}
-            </span>
+            <span className="price">{`$${price}`}</span>
             <button className="button--secondary bid button">Bid</button>
           </section>
           <section className="detail__secondary-information characteristics">
-            <p className="characteristics__summary">{summary}</p>
+            {summary && <p className="characteristics__summary">{summary}</p>}
             <ol className="characteristics__fields">
-              <li className="characteristics__field">Materials</li>
-              <li className="characteristics__field">Size</li>
-              <li className="characteristics__field">Rarity</li>
-              <li className="characteristics__field">Medium</li>
-              <li className="characteristics__field">Condition</li>
-              <li className="characteristics__field">Signature</li>
-              <li className="characteristics__field">
-                Certificate of authenticity
-              </li>
-              <li className="characteristics__field">Frame</li>
+              {materials && (
+                <li className="characteristics__field">Materials</li>
+              )}
+              {size && <li className="characteristics__field">Size</li>}
+              {rarity && <li className="characteristics__field">Rarity</li>}
+              {medium && <li className="characteristics__field">Medium</li>}
+              {signature && (
+                <li className="characteristics__field">Signature</li>
+              )}
+              {condition && (
+                <li className="characteristics__field">Condition</li>
+              )}
+
+              {certificate && (
+                <li className="characteristics__field">
+                  Certificate of authenticity
+                </li>
+              )}
+
+              {frame && <li className="characteristics__field">Frame</li>}
             </ol>
             <ol className="characteristics__values">
-              <li className="characteristics__value">{materials}</li>
-              <li className="characteristics__value">{size}</li>
-              <li className="characteristics__value">{rarity}</li>
-              <li className="characteristics__value">{medium}</li>
-              <li className="characteristics__value">{condition}</li>
-              <li className="characteristics__value">
-                {signature === "true"
-                  ? feedbackUtils.paintings.signature.true
-                  : feedbackUtils.paintings.signature.false}
-              </li>
-              <li className="characteristics__value">
-                {certificate === "true"
-                  ? feedbackUtils.paintings.certificate.true
-                  : feedbackUtils.paintings.certificate.false}
-              </li>
-              <li className="characteristics__value">
-                {frame === "true"
-                  ? feedbackUtils.paintings.frame.true
-                  : feedbackUtils.paintings.frame.false}
-              </li>
+              {materials && (
+                <li className="characteristics__value">{materials}</li>
+              )}
+              {size && <li className="characteristics__value">{size}</li>}
+              {rarity && <li className="characteristics__value">{rarity}</li>}
+              {medium && <li className="characteristics__value">{medium}</li>}
+              {condition && (
+                <li className="characteristics__value">{condition}</li>
+              )}
+              {signature && (
+                <li className="characteristics__value">
+                  {signature === "true"
+                    ? feedbackUtils.paintings.signature.true
+                    : feedbackUtils.paintings.signature.false}
+                </li>
+              )}
+              {certificate && (
+                <li className="characteristics__value">
+                  {certificate === "true"
+                    ? feedbackUtils.paintings.certificate.true
+                    : feedbackUtils.paintings.certificate.false}
+                </li>
+              )}
+              {frame && (
+                <li className="characteristics__value">
+                  {frame === "true"
+                    ? feedbackUtils.paintings.frame.true
+                    : feedbackUtils.paintings.frame.false}
+                </li>
+              )}
             </ol>
           </section>
         </div>

@@ -6,6 +6,7 @@ const CreateFormStyled = styled.form`
   justify-content: center;
 
   align-self: center;
+  width: 100%;
 
   .form {
     &__button {

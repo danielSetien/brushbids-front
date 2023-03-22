@@ -7,3 +7,9 @@ export interface BackPaintingsResponse {
 export interface BackDetailResponse {
   painting: Painting;
 }
+
+export interface AxiosPaintingResponse {
+  data: {
+    newPainting: Painting;
+  };
+}

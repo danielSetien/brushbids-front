@@ -9,12 +9,23 @@ import {
   loadPaintingsActionCreator,
 } from "../../store/features/paintingsSlice/paintingsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { backRouteUtils } from "../../utils/routeUtils/routeUtils";
-import { BackDetailResponse, BackPaintingsResponse } from "./types";
+import {
+  backRouteUtils,
+  frontRouteUtils,
+} from "../../utils/routeUtils/routeUtils";
+import {
+  AxiosPaintingResponse,
+  BackDetailResponse,
+  BackPaintingsResponse,
+} from "./types";
 import definedResponses from "../../utils/responseUtils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
-import { Painting } from "../../types/paintingTypes";
+import { useRouter } from "next/router";
+import {
+  setIsLoadingActionCreator,
+  unsetIsLoadingActionCreator,
+} from "../../store/features/userUi/uiSlice";
 
 interface UsePaintingsStructure {
   getPaintings: () => Promise<void>;
@@ -26,6 +37,7 @@ interface UsePaintingsStructure {
 const usePaintings = (): UsePaintingsStructure => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.user);
+  const router = useRouter();
 
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
   const { paintingsEndpoint, createEndpoint } = backRouteUtils;
@@ -68,6 +80,8 @@ const usePaintings = (): UsePaintingsStructure => {
   );
 
   const deletePainting = async (id: string) => {
+    dispatch(setIsLoadingActionCreator());
+
     try {
       const response = await fetch(`${apiUrl}${paintingsEndpoint}/${id}`, {
         method: "DELETE",
@@ -82,6 +96,8 @@ const usePaintings = (): UsePaintingsStructure => {
 
       dispatch(deletePaintingActionCreator(id));
 
+      dispatch(unsetIsLoadingActionCreator());
+
       displaySuccessModal(feedbackUtils.success.deletionMessage);
     } catch (error: unknown) {
       displayErrorModal((error as Error).message);
@@ -89,15 +105,20 @@ const usePaintings = (): UsePaintingsStructure => {
   };
 
   const createPainting = async (paintingData: FormData) => {
+    dispatch(setIsLoadingActionCreator());
+
     try {
-      const response: Painting = await axios.post(
+      const response: AxiosPaintingResponse = await axios.post(
         `${apiUrl}${createEndpoint}`,
         paintingData
       );
+      dispatch(createPaintingActionCreator(response.data.newPainting));
 
-      dispatch(createPaintingActionCreator(response));
+      dispatch(unsetIsLoadingActionCreator());
 
       displaySuccessModal(feedbackUtils.success.creationMessage);
+
+      router.push(frontRouteUtils.homePage);
     } catch {
       displayErrorModal(definedResponses.internalServerError.message);
     }

@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineFolderAdd } from "react-icons/ai";
 import usePaintings from "../../hooks/usePaintings/usePaintings";
@@ -6,11 +5,9 @@ import {
   CreatePaintingFormFields,
   CreatePaintingSelectFields,
 } from "../../types/paintingTypes";
-import { frontRouteUtils } from "../../utils/routeUtils/routeUtils";
 import CreateFormStyled from "./CreateFormStyled";
 
 const CreateForm = (): JSX.Element => {
-  const router = useRouter();
   const { createPainting } = usePaintings();
   const [image, setImage] = useState<File>();
 
@@ -77,8 +74,6 @@ const CreateForm = (): JSX.Element => {
     }
 
     createPainting(newPaintingData);
-
-    router.push(frontRouteUtils.homePage);
   };
 
   return (

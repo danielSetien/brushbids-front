@@ -69,8 +69,8 @@ const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme.colors.secondary};
   }
 
-  .toast-sucess {
-    background-color: ${(props) => props.theme.colors.modalSuccess} !important;
+  .toast-success {
+    background-color: ${(props) => props.theme.colors.modalSuccess};
     color: ${(props) => props.theme.colors.secondary} ;
   }
 

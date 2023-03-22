@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const HeaderStyled = styled.nav`
+  min-width: 96vw;
+
   .navbar {
     display: flex;
     flex-wrap: wrap;

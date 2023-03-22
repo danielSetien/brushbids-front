@@ -20,7 +20,6 @@ export interface Painting {
   summary?: string;
   width?: string;
   height?: string;
-  bidCount?: string;
 }
 
 export type Paintings = Painting[];

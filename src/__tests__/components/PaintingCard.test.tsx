@@ -27,7 +27,9 @@ describe("Given a PaintingCard component", () => {
     test("Then it should show a painting image", () => {
       const expectedPaintingName = painting.name;
 
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" index={2} />
+      );
 
       const paintingImage = screen.getByRole("img", {
         name: expectedPaintingName,
@@ -39,7 +41,9 @@ describe("Given a PaintingCard component", () => {
     test("Then it should show an author's name", () => {
       const expectedAuthor = painting.author;
 
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" index={2} />
+      );
 
       const author = screen.getByText(expectedAuthor);
 
@@ -49,26 +53,13 @@ describe("Given a PaintingCard component", () => {
     test("Then it should show a painting's name and year of production", () => {
       const expectedInformation = `${painting.name}, ${painting.year}`;
 
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
+      renderWithProviders(
+        <PaintingCard painting={painting} loading="lazy" index={2} />
+      );
 
       const nameAndYear = screen.getByText(expectedInformation);
 
       expect(nameAndYear).toBeInTheDocument();
-    });
-  });
-
-  describe("When rendering a painting with 2 bids", () => {
-    test("Then it should show its price and its bid count", () => {
-      painting.bidCount = "2";
-      const expectedPriceAndBidcount = `$${painting.price!.toLocaleString()} (${
-        painting.bidCount
-      } bids)`;
-
-      renderWithProviders(<PaintingCard painting={painting} loading="lazy" />);
-
-      const priceAndBidCount = screen.getByText(expectedPriceAndBidcount);
-
-      expect(priceAndBidCount).toBeInTheDocument();
     });
   });
 
@@ -77,7 +68,7 @@ describe("Given a PaintingCard component", () => {
       const expectedRenderedButton = ariaLabels.buttonEdit;
 
       renderWithProviders(
-        <PaintingCard painting={painting} loading="lazy" />,
+        <PaintingCard painting={painting} loading="lazy" index={2} />,
         storeWithAdminUser
       );
 
@@ -90,7 +81,7 @@ describe("Given a PaintingCard component", () => {
       const expectedRenderedButton = ariaLabels.buttonDelete;
 
       renderWithProviders(
-        <PaintingCard painting={painting} loading="lazy" />,
+        <PaintingCard painting={painting} loading="lazy" index={2} />,
         storeWithAdminUser
       );
 
@@ -105,7 +96,7 @@ describe("Given a PaintingCard component", () => {
       const expectedRenderedButton = ariaLabels.buttonDelete;
 
       renderWithProviders(
-        <PaintingCard painting={painting} loading="lazy" />,
+        <PaintingCard painting={painting} loading="lazy" index={2} />,
         storeWithAdminUser
       );
 
@@ -122,7 +113,7 @@ describe("Given a PaintingCard component", () => {
       const expectedRenderedButton = ariaLabels.buttonEdit;
 
       renderWithProviders(
-        <PaintingCard painting={painting} loading="lazy" />,
+        <PaintingCard painting={painting} loading="lazy" index={2} />,
         storeWithAdminUser
       );
 
