@@ -8,11 +8,14 @@ import GlobalStyles from "../styles/GlobalStyles";
 import theme from "../styles/theme";
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL!;
+
   return (
     <>
       <Head>
         <title key="title">Brushbids</title>
         <meta name="description" content="Bid on curated artwork" />
+        <link rel="preconnect" href={apiUrl}></link>
       </Head>
 
       <ThemeProvider theme={theme}>

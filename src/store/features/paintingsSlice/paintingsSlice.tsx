@@ -27,7 +27,6 @@ const initialPaintingDetail: Painting = {
   image: "",
   width: "",
   height: "",
-  bidCount: "",
 };
 
 const initialPaintings = [] as Paintings;

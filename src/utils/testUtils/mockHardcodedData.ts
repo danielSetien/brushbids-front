@@ -76,7 +76,6 @@ export const mockPaintings: Paintings = [
     gallery: "Private Collection",
     height: "468",
     width: "443",
-    bidCount: "2",
   },
   {
     id: "6415d0a9e31a17c33ee21ebb",

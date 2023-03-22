@@ -21,9 +21,7 @@ import {
 import definedResponses from "../../utils/responseUtils/responseUtils";
 import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
-import { Painting } from "../../types/paintingTypes";
 import { useRouter } from "next/router";
-import pageUtils from "../../utils/pageUtils/pageUtils";
 import {
   setIsLoadingActionCreator,
   unsetIsLoadingActionCreator,

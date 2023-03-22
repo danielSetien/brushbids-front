@@ -16,7 +16,7 @@ interface PaintingCardProps {
 }
 
 const PaintingCard = ({
-  painting: { image, name, id, author, year, price, bidCount, width, height },
+  painting: { image, name, id, author, year, price, width, height },
   loading,
   index,
 }: PaintingCardProps): JSX.Element => {
@@ -70,10 +70,7 @@ const PaintingCard = ({
               <span className="information__author">{author}</span>
               <span className="information__name-and-year">{`${name}, ${year}`}</span>
               <span className="information__price-and-bids">
-                {price &&
-                  `$${price.toLocaleString()} ${
-                    bidCount ? `(${bidCount} bids)` : ""
-                  }`}
+                {price && `$${price.toLocaleString()}`}
               </span>
             </div>
           </Link>
