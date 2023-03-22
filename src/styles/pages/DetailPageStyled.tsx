@@ -1,18 +1,12 @@
 import styled from "styled-components";
 
 const DetailPageStyled = styled.div`
-  min-width: 95vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-  padding-left: ${(props) => props.theme.page.padding};
-  padding-right: ${(props) => props.theme.page.padding};
+  justify-content: space-between;
 
-  .container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    justify-content: space-between;
-  }
   .image {
     margin-top: 10px;
     margin-bottom: 30px;
@@ -73,9 +67,7 @@ const DetailPageStyled = styled.div`
   @media screen and (min-width: ${(props) => props.theme.breakpoint.smallest}) {
     flex-wrap: wrap;
 
-    .container {
-      justify-content: center;
-    }
+    justify-content: center;
 
     .image {
       width: 480px;
@@ -166,7 +158,7 @@ const DetailPageStyled = styled.div`
   }
 
   @media screen and (min-width: ${(props) => props.theme.breakpoint.medium}) {
-    min-width: 100vw;
+    justify-content: space-between;
 
     .detail {
       &__information-section {
@@ -178,10 +170,6 @@ const DetailPageStyled = styled.div`
     .image {
       margin-left: 0;
       margin-right: 0;
-    }
-
-    .container {
-      justify-content: space-between;
     }
   }
 `;

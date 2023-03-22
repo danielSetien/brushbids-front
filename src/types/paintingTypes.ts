@@ -3,8 +3,11 @@ export interface Painting {
   author: string;
   name: string;
   year: string;
-  certificate: string;
+  price: string;
   image: string;
+  width: string;
+  height: string;
+  certificate?: string;
   gallery?: string;
   technique?: string;
   size?: string;
@@ -14,12 +17,9 @@ export interface Painting {
   rarity?: string;
   condition?: string;
   signature?: string;
-  price?: string;
   frame?: string;
   highlightOrder?: string;
   summary?: string;
-  width?: string;
-  height?: string;
 }
 
 export type Paintings = Painting[];
