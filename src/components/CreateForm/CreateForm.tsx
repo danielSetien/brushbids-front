@@ -6,6 +6,8 @@ import {
   CreatePaintingFormFields,
   CreatePaintingSelectFields,
 } from "../../types/paintingTypes";
+import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
+import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import CreateFormStyled from "./CreateFormStyled";
 
 const CreateForm = (): JSX.Element => {
@@ -69,7 +71,7 @@ const CreateForm = (): JSX.Element => {
     }
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const newPaintingData = new FormData(event.currentTarget);
@@ -78,7 +80,9 @@ const CreateForm = (): JSX.Element => {
       newPaintingData.append("image", image);
     }
 
-    createPainting(newPaintingData);
+    await createPainting(newPaintingData);
+
+    displaySuccessModal(feedbackUtils.success.creationMessage);
   };
 
   return (
