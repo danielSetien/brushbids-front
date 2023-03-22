@@ -36,8 +36,8 @@ const PaintingCard = ({
               <Image
                 src={image}
                 alt={name}
-                width={+width!}
-                height={+height!}
+                width={+width}
+                height={+height}
                 className="image"
                 loading={loading}
                 priority={index === 1}
