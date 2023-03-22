@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { setButtonIsLoadingActionCreator } from "../../store/features/userUi/uiSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { LoginFormFields, UserCredentials } from "../../types/userTypes";
 import LoginFormStyled from "./LoginFormStyled";
 
@@ -11,6 +13,8 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
     email: "",
     password: "",
   });
+
+  const { buttonIsLoading } = useAppSelector((state) => state.ui);
 
   const handleFormFieldsChange = ({
     target: { id, value },
@@ -56,7 +60,7 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
       />
       <button
         type="submit"
-        className="form__button"
+        className={`form__button ${buttonIsLoading && " button--loading"}`}
         disabled={
           !(
             Boolean(formFields.email.length) &&
@@ -64,7 +68,9 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
           )
         }
       >
-        Log in
+        <div className={`button__content${buttonIsLoading && "--loading"}`}>
+          {buttonIsLoading ? "/" : "Log in"}
+        </div>
       </button>
     </LoginFormStyled>
   );

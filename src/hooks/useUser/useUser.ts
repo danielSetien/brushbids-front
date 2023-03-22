@@ -4,7 +4,9 @@ import fetch from "node-fetch";
 import displayErrorModal from "../../utils/componentUtils/modals/errorModal";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
 import {
+  setButtonIsLoadingActionCreator,
   setIsLoadingActionCreator,
+  unsetButtonIsLoadingActionCreator,
   unsetIsLoadingActionCreator,
 } from "../../store/features/userUi/uiSlice";
 import { useAppDispatch } from "../../store/hooks";
@@ -31,6 +33,7 @@ const useUser = (): UseUserStructure => {
 
   const loginUser = async (userCredentials: UserCredentials) => {
     dispatch(setIsLoadingActionCreator());
+    dispatch(setButtonIsLoadingActionCreator());
 
     try {
       const backResponse = await fetch(`${apiUrl}${loginEndpoint}`, {
@@ -60,12 +63,14 @@ const useUser = (): UseUserStructure => {
       localStorage.setItem("token", token);
 
       dispatch(unsetIsLoadingActionCreator());
+      dispatch(unsetButtonIsLoadingActionCreator());
 
       router.push(homePage);
-    } catch {
+    } catch (error: unknown) {
       dispatch(unsetIsLoadingActionCreator());
+      dispatch(unsetButtonIsLoadingActionCreator());
 
-      displayErrorModal(definedResponses.internalServerError.message);
+      displayErrorModal((error as Error).message);
     }
   };
 
