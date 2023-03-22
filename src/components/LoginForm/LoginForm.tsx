@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { setButtonIsLoadingActionCreator } from "../../store/features/userUi/uiSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { LoginFormFields, UserCredentials } from "../../types/userTypes";
 import LoginFormStyled from "./LoginFormStyled";
 
@@ -14,7 +13,9 @@ const LoginForm = ({ loginUser }: LoginFormProps): JSX.Element => {
     password: "",
   });
 
-  const { buttonIsLoading } = useAppSelector((state) => state.ui);
+  const { submitIsLoading: buttonIsLoading } = useAppSelector(
+    (state) => state.ui
+  );
 
   const handleFormFieldsChange = ({
     target: { id, value },

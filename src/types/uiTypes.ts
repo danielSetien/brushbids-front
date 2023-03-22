@@ -1,4 +1,4 @@
 export interface UiState {
   isLoading: boolean;
-  buttonIsLoading: boolean;
+  submitIsLoading: boolean;
 }

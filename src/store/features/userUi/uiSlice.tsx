@@ -3,7 +3,7 @@ import { UiState } from "../../../types/uiTypes";
 
 export const initialUiState: UiState = {
   isLoading: false,
-  buttonIsLoading: false,
+  submitIsLoading: false,
 };
 
 const uiSlice = createSlice({
@@ -31,7 +31,7 @@ const uiSlice = createSlice({
       action: PayloadAction<void>
     ): UiState => ({
       ...currentUserState,
-      buttonIsLoading: true,
+      submitIsLoading: true,
     }),
 
     unsetSubmitIsLoading: (
@@ -39,7 +39,7 @@ const uiSlice = createSlice({
       action: PayloadAction<void>
     ): UiState => ({
       ...currentUserState,
-      buttonIsLoading: false,
+      submitIsLoading: false,
     }),
   },
 });

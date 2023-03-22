@@ -147,8 +147,8 @@ describe("Given a CreateForm component", () => {
 
       const storeWithButtonIsLoading = {
         ui: {
-          buttonIsLoading: true,
-          isLoading: true,
+          submitIsLoading: true,
+          isLoading: false,
         },
       };
 

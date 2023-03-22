@@ -12,7 +12,9 @@ const CreateForm = (): JSX.Element => {
   const { createPainting } = usePaintings();
   const [image, setImage] = useState<File>();
 
-  const { buttonIsLoading } = useAppSelector((state) => state.ui);
+  const { submitIsLoading: buttonIsLoading } = useAppSelector(
+    (state) => state.ui
+  );
 
   const [formFields, setFormFields] = useState<CreatePaintingFormFields>({
     author: "",

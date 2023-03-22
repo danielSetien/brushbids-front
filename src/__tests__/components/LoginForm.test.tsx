@@ -157,7 +157,7 @@ describe("Given a LoginForm component", () => {
 
       const storeWithButtonIsLoading = {
         ui: {
-          buttonIsLoading: true,
+          submitIsLoading: true,
           isLoading: true,
         },
       };
