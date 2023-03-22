@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineFolderAdd } from "react-icons/ai";
 import usePaintings from "../../hooks/usePaintings/usePaintings";
+import { useAppSelector } from "../../store/hooks";
 import {
   CreatePaintingFormFields,
   CreatePaintingSelectFields,
@@ -10,6 +11,8 @@ import CreateFormStyled from "./CreateFormStyled";
 const CreateForm = (): JSX.Element => {
   const { createPainting } = usePaintings();
   const [image, setImage] = useState<File>();
+
+  const { buttonIsLoading } = useAppSelector((state) => state.ui);
 
   const [formFields, setFormFields] = useState<CreatePaintingFormFields>({
     author: "",
@@ -272,7 +275,7 @@ const CreateForm = (): JSX.Element => {
       />
       <button
         type="submit"
-        className="form__button"
+        className={`form__button ${buttonIsLoading && " button--loading"}`}
         disabled={
           !(
             Boolean(formFields.author.length) &&
@@ -283,7 +286,9 @@ const CreateForm = (): JSX.Element => {
           )
         }
       >
-        Add
+        <div className={`button__content${buttonIsLoading ? "--loading" : ""}`}>
+          {buttonIsLoading ? "/" : "Add"}
+        </div>
       </button>
     </CreateFormStyled>
   );

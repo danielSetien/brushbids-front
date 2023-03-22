@@ -67,6 +67,26 @@ const CreateFormStyled = styled.form`
   @media screen and (min-width: ${(props) => props.theme.breakpoint.smallest}) {
     width: 500px;
   }
+
+  .button--loading {
+    background-color: ${(props) => props.theme.colors.accent};
+  }
+
+  .button__content--loading {
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
 `;
 
 export default CreateFormStyled;
