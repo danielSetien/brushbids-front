@@ -63,4 +63,18 @@ describe("Given a DetailPage", () => {
       });
     });
   });
+
+  describe("When rendering a painting that doesn't have additional characteristics", () => {
+    test("Then it should NOT show additional characteristics", async () => {
+      const expectedLabelText = "characteristics";
+
+      renderWithProviders(<DetailPage painting={mockPaintings[4]} />);
+
+      await waitFor(() => {
+        const label = screen.queryByText(expectedLabelText);
+
+        expect(label).not.toBeInTheDocument();
+      });
+    });
+  });
 });

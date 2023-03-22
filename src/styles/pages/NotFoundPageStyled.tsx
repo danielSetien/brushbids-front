@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
 const NotFoundPageStyled = styled.div`
-  width: 100vw;
-
-  padding-left: ${(props) => props.theme.page.padding};
-  padding-right: ${(props) => props.theme.page.padding};
-
   display: flex;
   flex-direction: column;
 

@@ -3,7 +3,7 @@ import NotFoundPageStyled from "../styles/pages/NotFoundPageStyled";
 
 const NotFoundPage = (): JSX.Element => {
   return (
-    <NotFoundPageStyled className="not-found-page">
+    <NotFoundPageStyled className="not-found-page page">
       <section className="not-found-page__container">
         <Image
           src={"/img/brushbids-full-logo.webp"}

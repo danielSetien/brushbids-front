@@ -25,13 +25,26 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
+  #__next {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  main {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   button, input {
     font-family: inherit;
     font-size: inherit;
     border: none;
   }
 
- 
+  
 
   .button {
     cursor: pointer;

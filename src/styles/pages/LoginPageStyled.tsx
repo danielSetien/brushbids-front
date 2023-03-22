@@ -1,15 +1,8 @@
 import styled from "styled-components";
 
 const LoginPageStyled = styled.div`
-  min-width: 95vw;
-
-  padding-left: ${(props) => props.theme.page.padding};
-  padding-right: ${(props) => props.theme.page.padding};
-
   display: flex;
   flex-direction: column;
-
-  width: ${(props) => props.theme.page.width};
 
   .logo {
     align-self: center;
@@ -40,10 +33,6 @@ const LoginPageStyled = styled.div`
 
       margin-top: 40px;
     }
-  }
-
-  @media screen and (min-width: ${(props) => props.theme.breakpoint.smallest}) {
-    width: ${(props) => props.theme.form.width};
   }
 `;
 

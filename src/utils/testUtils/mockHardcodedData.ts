@@ -100,4 +100,15 @@ export const mockPaintings: Paintings = [
     width: "1174",
     height: "1379",
   },
+  {
+    id: "w345943q3203o2kll",
+    author: "Jackson Pollock",
+    name: "Mural",
+    price: "12000000",
+    image:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.traveler.es%2Fexperiencias%2Farticulos%2Fviaje-a-un-cuadro-mural-de-jackson-pollock%2F17929&psig=AOvVaw3XqhpnEsdviOKbYtMosdbO&ust=1679610433889000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCDlszK8P0CFQAAAAAdAAAAABAE",
+    year: "1943",
+    width: "200",
+    height: "200",
+  },
 ];

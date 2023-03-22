@@ -5,7 +5,7 @@ import CreateFormPageStyled from "../../styles/pages/CreateFormPageStyled";
 const CreateFormPage = () => {
   return (
     <>
-      <CreateFormPageStyled>
+      <CreateFormPageStyled className="page">
         <ToastContainer />
         <CreateForm />
       </CreateFormPageStyled>

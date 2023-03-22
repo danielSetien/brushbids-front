@@ -18,7 +18,7 @@ const LoginPage = () => {
   }
 
   return (
-    <LoginPageStyled className="login-page">
+    <LoginPageStyled className="login-page page">
       <ToastContainer />
       <section className="login-page__container">
         <Image
