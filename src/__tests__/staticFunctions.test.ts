@@ -5,6 +5,7 @@ import {
   getStaticPaths,
   getStaticProps as getStaticPropsForDetail,
 } from "../pages/paintings/[id]";
+import pageUtils from "../utils/pageUtils/pageUtils";
 
 import { mockPaintings } from "../utils/testUtils/mockHardcodedData";
 
@@ -69,6 +70,8 @@ describe("Given a getStaticProps function that fetches a particular painting", (
     test("Then it should return a props object with that particular painting", async () => {
       const expectedProps = {
         props: { painting: mockPaintings[0] },
+
+        revalidate: pageUtils.staticPages.revalidateSeconds,
       };
       const context: GetStaticPropsContext<ParsedUrlQuery, PreviewData> = {
         params: {

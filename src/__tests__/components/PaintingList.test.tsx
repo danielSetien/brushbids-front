@@ -4,6 +4,8 @@ import { initialPaintingsState } from "../../store/features/paintingsSlice/paint
 import { mockPaintings } from "../../utils/testUtils/mockHardcodedData";
 import renderWithProviders from "../../utils/testUtils/renderWithProviders";
 
+jest.mock("next/router", () => require("next-router-mock"));
+
 describe("Given a PaintingList component", () => {
   describe("When there is a list of two paintings in our store", () => {
     test("Then it should show two images of paintings", () => {

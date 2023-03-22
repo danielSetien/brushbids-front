@@ -171,7 +171,11 @@ describe("Given a createPainting function", () => {
         wrapper: Wrapper,
       });
 
-      axios.post = jest.fn().mockReturnValue(createdPainting);
+      axios.post = jest.fn().mockReturnValue({
+        data: {
+          newPainting: createdPainting,
+        },
+      });
 
       await act(async () => createPainting(paintingData));
 
