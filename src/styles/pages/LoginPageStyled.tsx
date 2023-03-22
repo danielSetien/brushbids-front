@@ -32,6 +32,7 @@ const LoginPageStyled = styled.div`
       color: ${(props) => props.theme.colors.grayscale.darker};
 
       margin-top: 40px;
+      margin-bottom: 20px;
     }
   }
 `;
