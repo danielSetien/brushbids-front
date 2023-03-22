@@ -23,7 +23,9 @@ import displaySuccessModal from "../../utils/componentUtils/modals/successModal"
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import { useRouter } from "next/router";
 import {
+  setButtonIsLoadingActionCreator,
   setIsLoadingActionCreator,
+  unsetButtonIsLoadingActionCreator,
   unsetIsLoadingActionCreator,
 } from "../../store/features/userUi/uiSlice";
 
@@ -105,7 +107,7 @@ const usePaintings = (): UsePaintingsStructure => {
   };
 
   const createPainting = async (paintingData: FormData) => {
-    dispatch(setIsLoadingActionCreator());
+    dispatch(setButtonIsLoadingActionCreator());
 
     try {
       const response: AxiosPaintingResponse = await axios.post(
@@ -114,12 +116,14 @@ const usePaintings = (): UsePaintingsStructure => {
       );
       dispatch(createPaintingActionCreator(response.data.newPainting));
 
-      dispatch(unsetIsLoadingActionCreator());
+      dispatch(unsetButtonIsLoadingActionCreator());
 
       displaySuccessModal(feedbackUtils.success.creationMessage);
 
       router.push(frontRouteUtils.homePage);
     } catch {
+      dispatch(unsetButtonIsLoadingActionCreator());
+
       displayErrorModal(definedResponses.internalServerError.message);
     }
   };

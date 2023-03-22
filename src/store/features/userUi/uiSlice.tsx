@@ -3,6 +3,7 @@ import { UiState } from "../../../types/uiTypes";
 
 export const initialUiState: UiState = {
   isLoading: false,
+  submitIsLoading: false,
 };
 
 const uiSlice = createSlice({
@@ -16,6 +17,7 @@ const uiSlice = createSlice({
       ...currentUserState,
       isLoading: true,
     }),
+
     unsetIsLoading: (
       currentUserState: UiState,
       action: PayloadAction<void>
@@ -23,12 +25,30 @@ const uiSlice = createSlice({
       ...currentUserState,
       isLoading: false,
     }),
+
+    setSubmitIsLoading: (
+      currentUserState: UiState,
+      action: PayloadAction<void>
+    ): UiState => ({
+      ...currentUserState,
+      submitIsLoading: true,
+    }),
+
+    unsetSubmitIsLoading: (
+      currentUserState: UiState,
+      action: PayloadAction<void>
+    ): UiState => ({
+      ...currentUserState,
+      submitIsLoading: false,
+    }),
   },
 });
 
 export const {
   setIsLoading: setIsLoadingActionCreator,
   unsetIsLoading: unsetIsLoadingActionCreator,
+  setSubmitIsLoading: setButtonIsLoadingActionCreator,
+  unsetSubmitIsLoading: unsetButtonIsLoadingActionCreator,
 } = uiSlice.actions;
 
 export const uiReducer = uiSlice.reducer;

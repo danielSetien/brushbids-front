@@ -140,4 +140,25 @@ describe("Given a CreateForm component", () => {
       expect(createPaintingSpy).toHaveBeenCalled();
     });
   });
+
+  describe("When the user has submitted the form", () => {
+    test("Then the the button should show a spinning '/'", async () => {
+      const expectedButtonText = "/";
+
+      const storeWithButtonIsLoading = {
+        ui: {
+          submitIsLoading: true,
+          isLoading: false,
+        },
+      };
+
+      renderWithProviders(<CreateForm />, storeWithButtonIsLoading);
+
+      const addButton = screen.getByRole("button", {
+        name: expectedButtonText,
+      });
+
+      expect(addButton).toHaveTextContent(expectedButtonText);
+    });
+  });
 });
