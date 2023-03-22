@@ -151,7 +151,7 @@ describe("Given a LoginForm component", () => {
     });
   });
 
-  describe("When the user submits the form", () => {
+  describe("When the user has submitted the form", () => {
     test("Then the the button should show a spinning '/'", async () => {
       const expectedButtonText = "/";
 
