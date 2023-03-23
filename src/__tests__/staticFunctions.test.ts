@@ -72,9 +72,10 @@ describe("Given a getStaticProps function that fetches a particular painting", (
         props: { painting: mockPaintings[0] },
         revalidate: pageUtils.staticPages.revalidateSeconds,
       };
+
       const context: GetStaticPropsContext<ParsedUrlQuery, PreviewData> = {
         params: {
-          id: "one",
+          id: "irrelevant",
         },
       };
 
@@ -90,7 +91,7 @@ describe("Given a getStaticPaths function that fetches the paths for a list of p
     test("Then it should return a props object with the paths for that list of paintings", async () => {
       const expectedPaths = {
         paths: [{ params: { id: mockPaintings[0].id } }],
-        fallback: false,
+        fallback: "blocking",
       };
 
       const context: GetStaticPropsContext<ParsedUrlQuery, PreviewData> = {};

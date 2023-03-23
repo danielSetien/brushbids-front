@@ -66,7 +66,7 @@ describe("Given a DetailPage", () => {
 
   describe("When rendering a painting that doesn't have additional characteristics", () => {
     test("Then it should NOT show additional characteristics", async () => {
-      const expectedLabelText = "characteristics";
+      const expectedLabelText = "characteristics list";
 
       renderWithProviders(<DetailPage painting={mockPaintings[4]} />);
 
