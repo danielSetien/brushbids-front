@@ -96,6 +96,10 @@ const DetailPageStyled = styled.div`
 
       margin-bottom: 40px;
 
+      &__list {
+        display: flex;
+      }
+
       &__summary {
         border: 1px solid ${(props) => props.theme.colors.grayscale.gray};
 

@@ -8,8 +8,6 @@ import {
 } from "../../utils/functionsUtils/functionUtils";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Painting } from "../../types/paintingTypes";
-import { store } from "../../store";
-import { loadDetailActionCreator } from "../../store/features/paintingsSlice/paintingsSlice";
 import pageUtils from "../../utils/pageUtils/pageUtils";
 import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 
@@ -24,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -32,7 +30,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params!.id;
   const painting = await getDetailData(id as string);
 
-  store.dispatch(loadDetailActionCreator(painting));
   return {
     props: { painting },
     revalidate: pageUtils.staticPages.revalidateSeconds,
@@ -113,7 +110,10 @@ const DetailPage = (painting: { painting: Painting }): JSX.Element => {
           {summary && <p className="characteristics__summary">{summary}</p>}
 
           {hasCharacteristics && (
-            <div aria-label="characteristics">
+            <div
+              aria-label="characteristics list"
+              className="characteristics__list"
+            >
               <ol className="characteristics__fields" aria-label="ch">
                 {materials && (
                   <li className="characteristics__field">Materials</li>
