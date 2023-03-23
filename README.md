@@ -19,3 +19,6 @@ Brushbids is a website that allows users to place bids on curated artworks. It i
 - Redux Toolkit: a library that simplifies the use of Redux by providing utilities to reduce boilerplate code and - standardize patterns
 - Styled Components: a CSS-in-JS library that allows you to write CSS styles as components in your React application
 - Jest: a popular JavaScript testing framework that is used for unit and integration testing.
+- MongoDB: a NoSQL database that uses a document-oriented data model.
+- Node.js: an open-source, cross-platform runtime environment for executing JavaScript code outside of a browser.
+- Express: a web framework for Node.js. Acts as a middleware layer that helps manage HTTP requests and responses, and also allows for easy creation of RESTful APIs.
