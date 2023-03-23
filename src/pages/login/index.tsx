@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import LoginForm from "../../components/LoginForm/LoginForm";
@@ -19,7 +18,6 @@ const LoginPage = () => {
 
   return (
     <LoginPageStyled className="login-page page">
-      <ToastContainer />
       <section className="login-page__container">
         <Image
           src={"/img/brushbids-full-logo.webp"}

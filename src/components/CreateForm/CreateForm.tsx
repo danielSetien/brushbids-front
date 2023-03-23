@@ -6,8 +6,6 @@ import {
   CreatePaintingFormFields,
   CreatePaintingSelectFields,
 } from "../../types/paintingTypes";
-import displaySuccessModal from "../../utils/componentUtils/modals/successModal";
-import feedbackUtils from "../../utils/feedbackUtils/feedbackUtils";
 import CreateFormStyled from "./CreateFormStyled";
 
 const CreateForm = (): JSX.Element => {
@@ -81,8 +79,6 @@ const CreateForm = (): JSX.Element => {
     }
 
     await createPainting(newPaintingData);
-
-    displaySuccessModal(feedbackUtils.success.creationMessage);
   };
 
   return (

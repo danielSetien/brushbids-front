@@ -1,5 +1,5 @@
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
+import { Flip, toast } from "react-toastify";
 
 const displaySuccessModal = (message: string) => {
   toast.success(message, {
@@ -7,6 +7,7 @@ const displaySuccessModal = (message: string) => {
     closeOnClick: true,
     autoClose: false,
     className: "toast-success",
+    transition: Flip,
   });
 };
 

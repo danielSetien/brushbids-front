@@ -1,5 +1,5 @@
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
+import { Flip, toast } from "react-toastify";
 
 const displayErrorModal = (message: string) => {
   toast.error(message, {
@@ -7,6 +7,7 @@ const displayErrorModal = (message: string) => {
     closeOnClick: true,
     autoClose: false,
     className: "toast-error",
+    transition: Flip,
   });
 };
 
