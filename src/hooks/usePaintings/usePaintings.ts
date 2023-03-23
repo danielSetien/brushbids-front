@@ -118,6 +118,8 @@ const usePaintings = (): UsePaintingsStructure => {
 
       dispatch(unsetButtonIsLoadingActionCreator());
 
+      displaySuccessModal(feedbackUtils.success.creationMessage);
+
       router.push(frontRouteUtils.homePage);
     } catch {
       dispatch(unsetButtonIsLoadingActionCreator());

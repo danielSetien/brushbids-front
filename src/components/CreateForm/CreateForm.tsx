@@ -81,8 +81,6 @@ const CreateForm = (): JSX.Element => {
     }
 
     await createPainting(newPaintingData);
-
-    displaySuccessModal(feedbackUtils.success.creationMessage);
   };
 
   return (

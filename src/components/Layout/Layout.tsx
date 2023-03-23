@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import useToken from "../../hooks/useToken/useToken";
 import {
   setIsLoadingActionCreator,
@@ -37,6 +38,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       {isLoading && <Loader />}
+      <ToastContainer />
       <Header />
       <main>{children}</main>
     </>
