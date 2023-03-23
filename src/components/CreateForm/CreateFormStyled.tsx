@@ -72,18 +72,28 @@ const CreateFormStyled = styled.form`
     background-color: ${(props) => props.theme.colors.accent};
   }
 
-  .button__content--loading {
-    animation-name: spin;
-    animation-duration: 1000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  .button__content {
+    &--loading {
+      animation-name: spin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
 
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
-      to {
-        transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button__content {
+      &--loading {
+        animation: none;
       }
     }
   }

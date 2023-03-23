@@ -4,12 +4,17 @@ const LoginFormStyled = styled.form`
   display: flex;
   flex-direction: column;
 
+  .field {
+    flex: 1;
+  }
+
   .button--loading {
     background-color: ${(props) => props.theme.colors.accent};
 
     display: flex;
     justify-content: center;
   }
+
   .button__content {
     &--loading {
       width: fit-content;
@@ -29,8 +34,12 @@ const LoginFormStyled = styled.form`
     }
   }
 
-  .field {
-    flex: 1;
+  @media (prefers-reduced-motion: reduce) {
+    .button__content {
+      &--loading {
+        animation: none;
+      }
+    }
   }
 `;
 
