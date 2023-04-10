@@ -6,6 +6,8 @@
 
 Brushbids is a website that allows users to place bids on curated artworks. It is built using NextJS, Redux Toolkit, Styled Components and Jest.
 
+[Visit Brushbids here](https://brushbids.vercel.app/)
+
 ### **Features**
 
 - See a list of paintings
